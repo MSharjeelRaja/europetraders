@@ -3,9 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Animated Text</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: yellow;
+            text-transform: uppercase;
+            animation: flash 1.5s infinite alternate, fadeIn 2s ease-in-out;
+        }
+
+        @keyframes flash {
+            0% { text-shadow: 0 0 5px yellow, 0 0 10px yellow; }
+            100% { text-shadow: 0 0 20px yellow, 0 0 40px yellow; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
-    <h1>hi</h1>
+    <h1>Free Mein Itna Hi Milta Hai @MSharjeel</h1>
 </body>
 </html>
