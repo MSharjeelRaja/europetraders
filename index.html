@@ -4,555 +4,638 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Europe Traders - Professional Tools</title>
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
+    
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        
+        .product-card {
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.2);
+        }
+        
+        .product-card img {
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .category-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+            z-index: 1;
+        }
+      
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn-primary:hover::after {
+            height: 100%;
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .bg {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('images/f5.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+
+}
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header/Navbar -->
-    <header class="fixed w-full z-50 bg-secondary-dark py-4 transition-all duration-300" id="header">
-        <div class="container-custom">
-            <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <a href="index.html" class="flex items-center space-x-2">
-                    <i class="fas fa-tools text-primary text-3xl"></i>
-                    <span class="text-primary font-heading font-bold text-2xl">EUROPE TRADERS</span>
-                </a>
-
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-white hover:text-primary transition-colors duration-300">Home</a>
-                    <a href="products.html" class="text-white hover:text-primary transition-colors duration-300">Products</a>
-                    <a href="categories.html" class="text-white hover:text-primary transition-colors duration-300">Categories</a>
-                    <a href="#brands" class="text-white hover:text-primary transition-colors duration-300">Brands</a>
-                    <a href="about.html" class="text-white hover:text-primary transition-colors duration-300">About Us</a>
-                    <a href="contact.html" class="text-white hover:text-primary transition-colors duration-300">Contact</a>
-                </nav>
-
-                <!-- Search and Cart -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <button class="text-white hover:text-primary transition-colors">
-                        <i class="fas fa-search text-lg"></i>
-                    </button>
-                    <a href="#" class="relative">
-                        <i class="fas fa-shopping-cart text-white hover:text-primary transition-colors text-xl"></i>
-                        <span class="absolute -top-2 -right-2 bg-primary text-secondary text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden text-white hover:text-primary" id="mobileMenuBtn">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-black bg-opacity-90 backdrop-blur-sm transition-all duration-300 py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <i class="fas fa-tools text-yellow-500 text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold text-yellow-500">Europe Traders</h1>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#home" class="hover:text-yellow-500 transition-colors duration-300">Home</a>
+                <a href="#categories" class="hover:text-yellow-500 transition-colors duration-300">Categories</a>
+                <a href="#products" class="hover:text-yellow-500 transition-colors duration-300">Products</a>
+                <a href="#contact" class="hover:text-yellow-500 transition-colors duration-300">Contact</a>
+                <a href="products.html" class="px-4 py-2 bg-yellow-500 text-black rounded-full font-medium hover:bg-yellow-400 transition-colors duration-300 btn-primary">All Products</a>
             </div>
-
-            <!-- Mobile Navigation -->
-            <div class="md:hidden mt-4 pb-4 hidden" id="mobileMenu">
-                <nav class="flex flex-col space-y-4">
-                    <a href="index.html" class="text-white hover:text-primary transition-colors px-2 py-1">Home</a>
-                    <a href="products.html" class="text-white hover:text-primary transition-colors px-2 py-1">Products</a>
-                    <a href="categories.html" class="text-white hover:text-primary transition-colors px-2 py-1">Categories</a>
-                    <a href="#brands" class="text-white hover:text-primary transition-colors px-2 py-1">Brands</a>
-                    <a href="about.html" class="text-white hover:text-primary transition-colors px-2 py-1">About Us</a>
-                    <a href="contact.html" class="text-white hover:text-primary transition-colors px-2 py-1">Contact</a>
-                    <div class="flex items-center space-x-6 pt-2">
-                        <button class="text-white hover:text-primary transition-colors">
-                            <i class="fas fa-search text-lg"></i>
-                        </button>
-                        <a href="#" class="relative">
-                            <i class="fas fa-shopping-cart text-white hover:text-primary transition-colors text-xl"></i>
-                            <span class="absolute -top-2 -right-2 bg-primary text-secondary text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
-                        </a>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="relative bg-secondary-dark min-h-screen flex items-center pt-24">
-        <!-- Background pattern -->
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-full opacity-10">
-                <div class="w-full h-full" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'8\' height=\'8\' viewBox=\'0 0 8 8\'%3E%3Cpath d=\'M8 0L0 0 0 8\' fill=\'none\' stroke=\'%23FFD700\' stroke-width=\'0.5\'/%3E%3C/svg%3E'); background-size: 8px 8px;"></div>
-            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
         </div>
         
-        <div class="container-custom z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                <div class="animate-fade-in-up">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                        Professional <span class="text-primary">Tools</span> for Every <span class="text-primary">Project</span>
-                    </h1>
-                    <p class="text-gray-300 text-lg mb-8">
-                        Europe Traders brings you premium quality mechanical tools from top European brands like Bosch, INCO, and more. Built to last, designed for professionals.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="products.html" class="btn btn-primary">
-                            Shop Now
-                        </a>
-                        <a href="#brands" class="btn btn-secondary">
-                            Explore Brands
-                        </a>
-                    </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-900 mt-4 py-2">
+            <div class="container mx-auto px-4">
+                <a href="#home" class="block py-2 hover:text-yellow-500 transition-colors duration-300">Home</a>
+                <a href="#categories" class="block py-2 hover:text-yellow-500 transition-colors duration-300">Categories</a>
+                <a href="#products" class="block py-2 hover:text-yellow-500 transition-colors duration-300">Products</a>
+                <a href="#contact" class="block py-2 hover:text-yellow-500 transition-colors duration-300">Contact</a>
+                <a href="products.html" class="block py-2 mt-2 bg-yellow-500 text-black text-center rounded-full font-medium hover:bg-yellow-400 transition-colors duration-300">All Products</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="bg min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20" >
+        <div class="container mx-auto max-w-3xl">
+            <h1 class="text-3xl md:text-5xl font-bold text-yellow-500 mb-6 scroll-reveal">Professional Tools for Every Project</h1>
+            <p class="text-lg mt-4 text-gray-300 mb-8 scroll-reveal">Your One-Stop Shop for High-Quality European Mechanical Tools.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 scroll-reveal">
+                <a href="products.html" class="px-6 py-3 bg-yellow-500 text-black font-bold rounded-full transition transform hover:scale-105 btn-primary">Explore Products</a>
+                <a href="#categories" class="px-6 py-3 border-2 border-yellow-500 text-yellow-500 font-bold rounded-full transition transform hover:scale-105 hover:bg-yellow-500 hover:bg-opacity-10">View Categories</a>
+            </div>
+            
+            <!-- Features -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 scroll-reveal">
+                <div class="bg-gray-900 bg-opacity-80 backdrop-blur-sm p-4 rounded-lg">
+                    <i class="fas fa-truck text-yellow-500 text-2xl mb-2"></i>
+                    <h3 class="font-medium">Free Shipping</h3>
+                    <p class="text-sm text-gray-400">On orders over \$100</p>
                 </div>
-                
-                <div class="relative animate-fade-in">
-                    <div class="bg-primary/10 rounded-full p-6 aspect-square flex items-center justify-center">
-                        <img 
-                            src="images/hero-tools.jpg" 
-                            alt="Professional Tools Collection" 
-                            class="max-w-full object-contain rounded-full"
-                        >
-                    </div>
-                    
-                    <!-- Floating badges -->
-                    <div class="absolute top-10 -left-5 bg-primary text-secondary font-bold py-2 px-4 rounded-lg shadow-lg animate-float">
-                        Top Quality
-                    </div>
-                    
-                    <div class="absolute bottom-10 -right-5 bg-primary text-secondary font-bold py-2 px-4 rounded-lg shadow-lg animate-float-delay">
-                        Best Prices
-                    </div>
+                <div class="bg-gray-900 bg-opacity-80 backdrop-blur-sm p-4 rounded-lg">
+                    <i class="fas fa-shield-alt text-yellow-500 text-2xl mb-2"></i>
+                    <h3 class="font-medium">Quality Guarantee</h3>
+                    <p class="text-sm text-gray-400">European standards</p>
+                </div>
+                <div class="bg-gray-900 bg-opacity-80 backdrop-blur-sm p-4 rounded-lg">
+                    <i class="fas fa-undo text-yellow-500 text-2xl mb-2"></i>
+                    <h3 class="font-medium">Easy Returns</h3>
+                    <p class="text-sm text-gray-400">30-day policy</p>
+                </div>
+                <div class="bg-gray-900 bg-opacity-80 backdrop-blur-sm p-4 rounded-lg">
+                    <i class="fas fa-headset text-yellow-500 text-2xl mb-2"></i>
+                    <h3 class="font-medium">24/7 Support</h3>
+                    <p class="text-sm text-gray-400">Always available</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Featured Products Section -->
-    <section class="py-16 bg-secondary" id="featured">
-        <div class="container-custom">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Featured Products</h2>
-                <div class="w-24 h-1 bg-primary mx-auto mb-4"></div>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    Discover our collection of premium quality tools from top European brands.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Product 1 -->
-                <div class="card group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="relative overflow-hidden h-64">
-                        <img 
-                            src="images/products/drill1.jpg" 
-                            alt="Bosch GSB 550 Professional Impact Drill" 
-                            class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                        >
-                        <div class="absolute top-4 left-4 bg-primary text-secondary font-bold text-sm py-1 px-2 rounded-md">
-                            SALE
-                        </div>
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <button class="btn btn-primary flex items-center">
-                                <i class="fas fa-shopping-cart mr-2"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="p-4">
-                        <div class="flex items-center mb-2">
-                            <span class="text-xs uppercase text-primary font-semibold">Bosch</span>
-                            <span class="mx-2 text-gray-500">|</span>
-                            <span class="text-xs text-gray-400">Drill Machines</span>
-                        </div>
-                        
-                        <a href="product-detail.html">
-                            <h3 class="font-semibold text-white group-hover:text-primary transition-colors duration-300 mb-2 line-clamp-2">
-                                Bosch GSB 550 Professional Impact Drill
-                            </h3>
-                        </a>
-                        
-                        <div class="flex items-center mb-3">
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="text-gray-400 text-sm ml-2">(124)</span>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <span class="text-primary font-bold text-xl">\$69.99</span>
-                            <span class="text-gray-400 line-through ml-2">\$89.99</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="card group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="relative overflow-hidden h-64">
-                        <img 
-                            src="images/products/cutter1.jpg" 
-                            alt="INCO Heavy Duty Wire Cutter" 
-                            class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                        >
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <button class="btn btn-primary flex items-center">
-                                <i class="fas fa-shopping-cart mr-2"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="p-4">
-                        <div class="flex items-center mb-2">
-                            <span class="text-xs uppercase text-primary font-semibold">INCO</span>
-                            <span class="mx-2 text-gray-500">|</span>
-                            <span class="text-xs text-gray-400">Cutters</span>
-                        </div>
-                        
-                        <a href="product-detail.html">
-                            <h3 class="font-semibold text-white group-hover:text-primary transition-colors duration-300 mb-2 line-clamp-2">
-                                INCO Heavy Duty Wire Cutter
-                            </h3>
-                        </a>
-                        
-                        <div class="flex items-center mb-3">
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="text-gray-400 text-sm ml-2">(87)</span>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <span class="text-primary font-bold text-xl">\$34.99</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="card group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="relative overflow-hidden h-64">
-                        <img 
-                            src="images/products/pliers1.jpg" 
-                            alt="Bosch Long Nose Pliers Set" 
-                            class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                        >
-                        <div class="absolute top-4 left-4 bg-primary text-secondary font-bold text-sm py-1 px-2 rounded-md">
-                            SALE
-                        </div>
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <button class="btn btn-primary flex items-center">
-                                <i class="fas fa-shopping-cart mr-2"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="p-4">
-                        <div class="flex items-center mb-2">
-                            <span class="text-xs uppercase text-primary font-semibold">Bosch</span>
-                            <span class="mx-2 text-gray-500">|</span>
-                            <span class="text-xs text-gray-400">Pliers</span>
-                        </div>
-                        
-                        <a href="product-detail.html">
-                            <h3 class="font-semibold text-white group-hover:text-primary transition-colors duration-300 mb-2 line-clamp-2">
-                                Bosch Long Nose Pliers Set
-                            </h3>
-                        </a>
-                        
-                        <div class="flex items-center mb-3">
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="text-gray-400 text-sm ml-2">(56)</span>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <span class="text-primary font-bold text-xl">\$39.99</span>
-                            <span class="text-gray-400 line-through ml-2">\$45.99</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="card group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="relative overflow-hidden h-64">
-                        <img 
-                            src="images/products/wrench1.jpg" 
-                            alt="INCO Adjustable Wrench 12-inch" 
-                            class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                        >
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <button class="btn btn-primary flex items-center">
-                                <i class="fas fa-shopping-cart mr-2"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="p-4">
-                        <div class="flex items-center mb-2">
-                            <span class="text-xs uppercase text-primary font-semibold">INCO</span>
-                            <span class="mx-2 text-gray-500">|</span>
-                            <span class="text-xs text-gray-400">Wrenches</span>
-                        </div>
-                        
-                        <a href="product-detail.html">
-                            <h3 class="font-semibold text-white group-hover:text-primary transition-colors duration-300 mb-2 line-clamp-2">
-                                INCO Adjustable Wrench 12-inch
-                            </h3>
-                        </a>
-                        
-                        <div class="flex items-center mb-3">
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="text-gray-400 text-sm ml-2">(92)</span>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <span class="text-primary font-bold text-xl">\$29.99</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="products.html" class="btn btn-primary">
-                    View All Products
-                </a>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- Categories Section -->
-    <section class="py-16 bg-secondary-dark">
-        <div class="container-custom">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Shop By Category</h2>
-                <div class="w-24 h-1 bg-primary mx-auto mb-4"></div>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    Browse our extensive collection of tools organized by categories to find exactly what you need.
-                </p>
+    <section id="categories" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10 scroll-reveal">
+                <h2 class="text-2xl md:text-4xl font-bold mb-4">Shop By Category</h2>
+                <div class="w-20 h-1 bg-yellow-500 mx-auto mb-4"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">Browse our extensive collection of tools organized by categories</p>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Category 1 -->
-                <div class="relative group overflow-hidden rounded-lg hover:-translate-y-2 transition-transform duration-300">
-                    <div class="aspect-[4/3] overflow-hidden">
-                        <img 
-                            src="images/categories/drills.jpg" 
-                            alt="Drill Machines" 
-                            class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                        >
+                <a href="products.html?category=drills" class="category-card rounded-xl overflow-hidden scroll-reveal">
+                    <img src="images/inco22.jpeg" alt="Drill Machines" class="w-full h-60 object-cover">
+                    <div class="category-content">
+                        <h3 class="text-xl font-bold text-white">Drill Machines</h3>
+                        <p class="text-sm text-gray-300 mb-2">24 Products</p>
+                        <span class="inline-block px-4 py-1 bg-yellow-500 text-black rounded-full text-sm font-medium">View All</span>
                     </div>
-                    
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <h3 class="text-white font-heading font-bold text-2xl mb-1">Drill Machines</h3>
-                        <p class="text-gray-300 mb-3 text-sm">Professional drilling tools for every surface</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-primary font-semibold">24 Products</span>
-                            <a 
-                                href="products.html?category=drills"
-                                class="text-white bg-primary/20 hover:bg-primary/40 px-4 py-2 rounded-full transition-colors duration-300"
-                            >
-                                Shop Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
+                </a>
+                
                 <!-- Category 2 -->
-                <div class="relative group overflow-hidden rounded-lg hover:-translate-y-2 transition-transform duration-300">
-                    <div class="aspect-[4/3] overflow-hidden">
-                        <img 
-                            src="images/categories/cutters.jpg" 
-                            alt="Cutters" 
-                            class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                        >
+                <a href="products.html?category=cutters" class="category-card rounded-xl overflow-hidden scroll-reveal">
+                    <img src="images/inco33.jpeg" alt="Cutters" class="w-full h-60 object-cover">
+                    <div class="category-content">
+                        <h3 class="text-xl font-bold text-white">Cutters</h3>
+                        <p class="text-sm text-gray-300 mb-2">18 Products</p>
+                        <span class="inline-block px-4 py-1 bg-yellow-500 text-black rounded-full text-sm font-medium">View All</span>
                     </div>
-                    
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <h3 class="text-white font-heading font-bold text-2xl mb-1">Cutters</h3>
-                        <p class="text-gray-300 mb-3 text-sm">Precision cutting tools for all materials</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-primary font-semibold">18 Products</span>
-                            <a 
-                                href="products.html?category=cutters"
-                                class="text-white bg-primary/20 hover:bg-primary/40 px-4 py-2 rounded-full transition-colors duration-300"
-                            >
-                                Shop Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
+                </a>
+                
                 <!-- Category 3 -->
-                <div class="relative group overflow-hidden rounded-lg hover:-translate-y-2 transition-transform duration-300">
-                    <div class="aspect-[4/3] overflow-hidden">
-                        <img 
-                            src="images/categories/pliers.jpg" 
-                            alt="Pliers" 
-                            class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                        >
+                <a href="products.html?category=pliers" class="category-card rounded-xl overflow-hidden scroll-reveal">
+                    <img src="images/icno12.jpeg" alt="Pliers" class="w-full h-60 object-cover">
+                    <div class="category-content">
+                        <h3 class="text-xl font-bold text-white">Pliers</h3>
+                        <p class="text-sm text-gray-300 mb-2">15 Products</p>
+                        <span class="inline-block px-4 py-1 bg-yellow-500 text-black rounded-full text-sm font-medium">View All</span>
                     </div>
-                    
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <h3 class="text-white font-heading font-bold text-2xl mb-1">Pliers</h3>
-                        <p class="text-gray-300 mb-3 text-sm">Grip and manipulate with professional ease</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-primary font-semibold">15 Products</span>
-                            <a 
-                                href="products.html?category=pliers"
-                                class="text-white bg-primary/20 hover:bg-primary/40 px-4 py-2 rounded-full transition-colors duration-300"
-                            >
-                                Shop Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
+                </a>
+                
                 <!-- Category 4 -->
-                <div class="relative group overflow-hidden rounded-lg hover:-translate-y-2 transition-transform duration-300">
-                    <div class="aspect-[4/3] overflow-hidden">
-                        <img 
-                            src="images/categories/power-tools.jpg" 
-                            alt="Power Tools" 
-                            class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                        >
+                <a href="products.html?category=wrenches" class="category-card rounded-xl overflow-hidden scroll-reveal">
+                    <img src="images/icno12.jpeg" alt="Wrenches" class="w-full h-60 object-cover">
+                    <div class="category-content">
+                        <h3 class="text-xl font-bold text-white">Wrenches</h3>
+                        <p class="text-sm text-gray-300 mb-2">20 Products</p>
+                        <span class="inline-block px-4 py-1 bg-yellow-500 text-black rounded-full text-sm font-medium">View All</span>
                     </div>
-                    
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <h3 class="text-white font-heading font-bold text-2xl mb-1">Power Tools</h3>
-                        <p class="text-gray-300 mb-3 text-sm">High-performance electric tools for professionals</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-primary font-semibold">32 Products</span>
-                            <a 
-                                href="products.html?category=power-tools"
-                                class="text-white bg-primary/20 hover:bg-primary/40 px-4 py-2 rounded-full transition-colors duration-300"
-                            >
-                                Shop Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
-
-    <!-- Special Offer Banner -->
-    <section class="py-16 bg-secondary relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full">
-            <div class="absolute inset-0 bg-gradient-to-r from-secondary via-secondary-light to-transparent opacity-90"></div>
-            <img src="images/banner-bg.jpg" alt="Special Offer" class="w-full h-full object-cover object-center">
-        </div>
-        
-        <div class="container-custom relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                <div>
-                    <span class="bg-primary text-secondary font-bold py-2 px-4 rounded-md inline-block mb-4">SPECIAL OFFER</span>
-                    <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4 text-white">
-                        20% OFF on All Bosch <br>Professional Tools
-                    </h2>
-                    <p class="text-gray-300 mb-6">
-                        Limited time offer on our complete range of Bosch professional tools. 
-                        High-quality German engineering at unbeatable prices.
-                    </p>
-                    <div class="flex flex-wrap gap-4 items-center">
-                        <a href="products.html?brand=bosch" class="btn btn-primary">
-                            Shop Now
-                        </a>
-                        <div class="flex items-center">
-                            <div class="bg-white/10 rounded-full h-12 w-12 flex items-center justify-center mr-3">
-                                <i class="fas fa-clock text-primary"></i>
-                            </div>
+    
+    <!-- Featured Products Section -->
+    <section id="products" class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10 scroll-reveal">
+                <h2 class="text-2xl md:text-4xl font-bold mb-4">Featured Products</h2>
+                <div class="w-20 h-1 bg-yellow-500 mx-auto mb-4"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">Discover our best-selling tools that professionals trust</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="product-card bg-gray-800 rounded-xl overflow-hidden scroll-reveal">
+                    <div class="relative overflow-hidden">
+                        <img src="images/inco22.jpeg" alt="Inco Drill Machine" class="w-full h-48 object-cover">
+                        <div class="absolute top-0 right-0 bg-yellow-500 text-black font-bold px-3 py-1 m-2 rounded">SALE</div>
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                            <a href="products.html" class="px-4 py-2 bg-yellow-500 text-black rounded-full font-medium transform hover:scale-105 transition-transform">View Details</a>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold mb-1">Inco Drill Machine</h3>
+                        <div class="flex items-center text-yellow-400 mb-2 text-sm">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-gray-400 ml-1">(45)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
                             <div>
-                                <p class="text-gray-400 text-sm">Offer Ends In</p>
-                                <p class="text-white font-semibold">7 Days</p>
+                                <span class="text-yellow-500 font-bold">\$120</span>
+                                <span class="text-gray-400 text-sm line-through ml-2">\$150</span>
                             </div>
+                            <button class="text-yellow-500 hover:text-yellow-400">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
                 
-                <div class="relative">
-                    <img 
-                        src="images/bosch-set.png" 
-                        alt="Bosch Tool Set" 
-                        class="max-w-full"
-                    >
-                    <div class="absolute -top-6 -right-6 bg-primary text-secondary font-bold text-3xl p-6 rounded-full flex items-center justify-center w-24 h-24 rotate-12 animate-pulse">
-                        <span>-20%</span>
+                <!-- Product 2 -->
+                <div class="product-card bg-gray-800 rounded-xl overflow-hidden scroll-reveal">
+                    <div class="relative overflow-hidden">
+                        <img src="images/inco33.jpeg" alt="Inco Cutter" class="w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                            <a href="products.html" class="px-4 py-2 bg-yellow-500 text-black rounded-full font-medium transform hover:scale-105 transition-transform">View Details</a>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold mb-1">Inco Cutter</h3>
+                        <div class="flex items-center text-yellow-400 mb-2 text-sm">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="text-gray-400 ml-1">(32)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-yellow-500 font-bold">\$90</span>
+                            </div>
+                            <button class="text-yellow-500 hover:text-yellow-400">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Brands Section -->
-    <section class="py-16 bg-secondary" id="brands">
-        <div class="container-custom">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Top Brands We Carry</h2>
-                <div class="w-24 h-1 bg-primary mx-auto mb-4"></div>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    We partner with the most trusted and reliable tool manufacturers from Europe and around the world.
-                </p>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-gray-800 rounded-xl overflow-hidden scroll-reveal">
+                    <div class="relative overflow-hidden">
+                        <img src="images/icno12.jpeg" alt="Inco Pliers" class="w-full h-48 object-cover">
+                        <div class="absolute top-0 right-0 bg-green-500 text-black font-bold px-3 py-1 m-2 rounded">NEW</div>
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                            <a href="products.html" class="px-4 py-2 bg-yellow-500 text-black rounded-full font-medium transform hover:scale-105 transition-transform">View Details</a>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold mb-1">Inco Pliers</h3>
+                        <div class="flex items-center text-yellow-400 mb-2 text-sm">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-400 ml-1">(67)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-yellow-500 font-bold">\$50</span>
+                            </div>
+                            <button class="text-yellow-500 hover:text-yellow-400">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-gray-800 rounded-xl overflow-hidden scroll-reveal">
+                    <div class="relative overflow-hidden">
+                        <img src="images/icno12.jpeg" alt="Adjustable Wrench" class="w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                            <a href="products.html" class="px-4 py-2 bg-yellow-500 text-black rounded-full font-medium transform hover:scale-105 transition-transform">View Details</a>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold mb-1">Adjustable Wrench</h3>
+                        <div class="flex items-center text-yellow-400 mb-2 text-sm">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                            <span class="text-gray-400 ml-1">(23)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-yellow-500 font-bold">\$75</span>
+                                <span class="text-gray-400 text-sm line-through ml-2">\$95</span>
+                            </div>
+                            <button class="text-yellow-500 hover:text-yellow-400">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mt-8" id="brandSlider">
-                <!-- Brand logos will be added by JavaScript -->
+            <div class="mt-10 text-center scroll-reveal">
+                <a href="products.html" class="px-6 py-3 bg-yellow-500 text-black font-bold rounded-full transition transform hover:scale-105 inline-block btn-primary pulse-animation">View All Products</a>
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="bg-secondary-dark pt-16 pb-8">
-        <div class="container-custom">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Company Info -->
-                <div>
-                    <div class="flex items-center space-x-2 mb-6">
-                        <i class="fas fa-tools text-primary text-3xl"></i>
-                        <span class="text-primary font-heading font-bold text-2xl">EUROPE TRADERS</span>
-                    </div>
-                    <p class="text-gray-400 mb-6">
-                        Your one-stop shop for premium quality mechanical tools from top European brands like Bosch, INCO, and more.
+    
+    <!-- Special Offer Banner -->
+    <section class="py-12 relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-r from-black to-transparent opacity-90"></div>
+            <img src="images/icno12.jpeg" alt="Special Offer" class="w-full h-full object-cover">
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-2/3 mb-8 md:mb-0 scroll-reveal">
+                    <div class="inline-block bg-yellow-500 text-black font-bold py-2 px-4 rounded-md mb-4">SPECIAL OFFER</div>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">20% OFF on All Bosch Professional Tools</h2>
+                    <p class="text-gray-300 mb-6 max-w-lg">
+                        Limited time offer on our complete range of Bosch professional tools. 
+                        High-quality German engineering at unbeatable prices.
                     </p>
+                    <a href="products.html?brand=bosch" class="px-6 py-3 bg-yellow-500 text-black font-bold rounded-lg transition transform hover:scale-105 inline-block btn-primary">Shop Now</a>
+                </div>
+                <div class="md:w-1/3 flex justify-center scroll-reveal">
+                    <div class="relative">
+                        <img src="images/icno12.jpeg" alt="Bosch Tool Set" class="max-w-full">
+                        <div class="absolute -top-4 -right-4 bg-yellow-500 text-black font-bold text-2xl p-4 rounded-full flex items-center justify-center w-20 h-20 rotate-12 pulse-animation">
+                            <span>-20%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10 scroll-reveal">
+                <h2 class="text-2xl md:text-4xl font-bold mb-4">Get In Touch</h2>
+                <div class="w-20 h-1 bg-yellow-500 mx-auto mb-4"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">Have questions about our products? Contact us today.</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2 scroll-reveal">
+                    <form class="bg-gray-800 p-6 rounded-xl">
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-300 mb-2">Your Name</label>
+                            <input type="text" id="name" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-500 transition-colors">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-300 mb-2">Email Address</label>
+                            <input type="email" id="email" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-500 transition-colors">
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block text-gray-300 mb-2">Your Message</label>
+                            <textarea id="message" rows="5" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-yellow-500 transition-colors"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-yellow-500 text-black font-bold py-3 rounded-lg hover:bg-yellow-400 transition-colors btn-primary">Send Message</button>
+                    </form>
+                </div>
+                
+                <div class="md:w-1/2 scroll-reveal">
+                    <div class="bg-gray-800 p-6 rounded-xl h-full">
+                        <h3 class="text-xl font-bold mb-6">Contact Information</h3>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="bg-yellow-500 bg-opacity-20 p-3 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-yellow-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Our Location</h4>
+                                <p class="text-gray-400">123 Tool Street, Industrial Zone<br>London, United Kingdom</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="bg-yellow-500 bg-opacity-20 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone-alt text-yellow-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Phone Number</h4>
+                                <p class="text-gray-400">+44 20 1234 5678</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="bg-yellow-500 bg-opacity-20 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-yellow-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Email Address</h4>
+                                <p class="text-gray-400">info@europetraders.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-yellow-500 bg-opacity-20 p-3 rounded-full mr-4">
+                                <i class="fas fa-clock text-yellow-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Working Hours</h4>
+                                <p class="text-gray-400">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                                <p class="text-gray-400">Saturday: 10:00 AM - 4:00 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-semibold mb-3">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-gray-700 hover:bg-yellow-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                                    <i class="fab fa-facebook-f text-white"></i>
+                                </a>
+                                <a href="#" class="bg-gray-700 hover:bg-yellow-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                                    <i class="fab fa-twitter text-white"></i>
+                                </a>
+                                <a href="#" class="bg-gray-700 hover:bg-yellow-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                                    <i class="fab fa-instagram text-white"></i>
+                                </a>
+                                <!-- WhatsApp Icon -->
+                                <a href="https://wa.me/923058689161" target="_blank" class="bg-green-500 hover:bg-green-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                                    <i class="fab fa-whatsapp text-white text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="bg-black text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-between">
+                <div class="w-full md:w-1/3 mb-8">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i class="fas fa-tools text-yellow-500 text-2xl"></i>
+                        <h3 class="text-xl font-bold text-yellow-500">Europe Traders</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted partner for high-quality European tools. We bring the best professional tools to your workshop at competitive prices.</p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                            <i class="fab fa-facebook-f text-xl"></i>
+                        <a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                            <i class="fab fa-twitter text-xl"></i>
+                        <a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">
+                            <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                            <i class="fab fa-instagram text-xl"></i>
+                        <a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">
+                            <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                            <i class="fab fa-youtube text-xl"></i>
+                        <a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
                 </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="text-white font-heading font-semibold text-xl mb-6">Quick Links</h3>
-                    <ul class="space-y-3">
-                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
-                        <li><a href="products.html" class="text-gray-400 hover:text-primary transition-colors">Products</a></li>
-                        <li><a href="about.html" class="text-gray-400 hover:text-primary transition-colors">About Us</a>
+                
+                <div class="w-full md:w-1/4 mb-8">
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-yellow-500 transition-colors">Home</a></li>
+                        <li><a href="#categories" class="text-gray-400 hover:text-yellow-500 transition-colors">Categories</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-yellow-500 transition-colors">Products</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-yellow-500 transition-colors">Contact Us</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-yellow-500 transition-colors">All Products</a></li>
+                    </ul>
+                </div>
+                
+                <div class="w-full md:w-1/3">
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe to receive updates on new products and special promotions.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email address" class="px-4 py-2 w-full bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:border-yellow-500">
+                        <button type="submit" class="bg-yellow-500 text-black px-4 py-2 rounded-r-lg hover:bg-yellow-400 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2023 Europe Traders. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-yellow-500 text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-yellow-500 text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-yellow-500 text-sm">Shipping Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript for interactivity -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.add('bg-opacity-95');
+            } else {
+                navbar.classList.remove('py-2');
+                navbar.classList.remove('bg-opacity-95');
+            }
+        });
+        
+        // Scroll reveal animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollElements = document.querySelectorAll('.scroll-reveal');
+            
+            const elementInView = (el, percentageScroll = 100) => {
+                const elementTop = el.getBoundingClientRect().top;
+                const elementHeight = el.getBoundingClientRect().height;
+                return (
+                    elementTop <= 
+                    ((window.innerHeight || document.documentElement.clientHeight) * (percentageScroll/100))
+                );
+            };
+            
+            const displayScrollElement = (element) => {
+                element.classList.add('active');
+            };
+            
+            const handleScrollAnimation = () => {
+                scrollElements.forEach((el) => {
+                    if (elementInView(el, 90)) {
+                        displayScrollElement(el);
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', () => {
+                handleScrollAnimation();
+            });
+            
+            // Initialize on page load
+            handleScrollAnimation();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+                
+                // Scroll to the target section
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
