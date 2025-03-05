@@ -3,44 +3,764 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated Text</title>
+    <title>Europe Traders - All Products</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: black;
-            overflow: hidden;
-            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            background-color: #000;
+            color: #fff;
         }
-
-        h1 {
-            font-size: 2rem;
-            font-weight: bold;
-            color: yellow;
-            text-transform: uppercase;
-            animation: flash 1.5s infinite alternate, fadeIn 2s ease-in-out;
+        
+        .product-grid-item {
+            transition: transform 0.3s ease;
         }
-
-        @keyframes flash {
-            0% { text-shadow: 0 0 5px yellow, 0 0 10px yellow; }
-            100% { text-shadow: 0 0 20px yellow, 0 0 40px yellow; }
+        
+        .product-grid-item:hover {
+            transform: scale(1.05);
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        .modal {
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
         }
     </style>
 </head>
 <body>
-    <h1>Free Mein Itna Hi Milta Hai @MSharjeel</h1>
+    <!-- Navbar (similar to main page) -->
+    <nav class="fixed w-full top-0 z-50 bg-black bg-opacity-90 backdrop-blur-sm transition-all duration-300 py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <i class="fas fa-tools text-yellow-500 text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold text-yellow-500">Europe Traders</h1>
+            </a>
+            
+            <!-- Category Filters -->
+            <div class="hidden md:flex items-center space-x-4">
+                <select id="category-filter" class="bg-gray-800 text-white px-4 py-2 rounded-lg">
+                    <option value="">All Categories</option>
+                    <option value="drills">Drill Machines</option>
+                    <option value="cutters">Cutters</option>
+                    <option value="pliers">Pliers</option>
+                    <option value="wrenches">Wrenches</option>
+                    <option value="welding">welding</option>
+                </select>
+                <input type="text" id="search-input" placeholder="Search products..." class="bg-gray-800 text-white px-4 py-2 rounded-lg">
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Products Grid -->
+    <section class="pt-24 pb-12 px-4">
+        <div class="container mx-auto">
+            <h1 class="text-3xl md:text-4xl font-bold text-yellow-500 mb-8 text-center">Our Products</h1>
+            
+            <div id="products-grid" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+                data-category="drills" 
+                data-name="Makita Drill Machine" 
+                data-price="7500" 
+                data-description="High-performance drill machine Dual Battery"
+                data-images='[
+                   "images/img/drill.jpg", 
+                   "images/img/dr.jpg", 
+                   "images/img/drill22.jpg"
+                ]'>
+               <img src="images/img/drill.jpg" alt="Drill Machine" class="w-full h-48 object-cover">
+               <div class="p-4">
+                   <h3 class="text-lg font-semibold mb-1">Makita Drill Machine</h3>
+                   <div class="flex items-center text-yellow-400 mb-2">
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star-half-alt"></i>
+                       <span class="text-gray-400 ml-2">(45)</span>
+                   </div>
+                   <div class="flex justify-between items-center">
+                       <span class="text-yellow-500 font-bold">Rs.8,299</span>
+                       <button class="text-yellow-500 hover:text-yellow-400">
+                           <i class="fas fa-shopping-cart"></i>
+                       </button>
+                   </div>
+               </div>
+           </div>
+
+
+
+
+
+           <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+                data-category="drills" 
+                data-name="Edon UAE Drill Machine" 
+                data-price="22000" 
+                data-description="High-performance drill machine 24 V"
+                data-images='[
+                   "images/img/drill33.jpg", 
+                   "images/img/drill3333.jpg", 
+                   "images/img/drill333333.jpg"
+                ]'>
+               <img src="images/img/drill33.jpg" alt="Drill Machine" class="w-full h-48 object-cover">
+               <div class="p-4">
+                   <h3 class="text-lg font-semibold mb-1">makita Drill Machine</h3>
+                   <div class="flex items-center text-yellow-400 mb-2">
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star-half-alt"></i>
+                       <span class="text-gray-400 ml-2">(45)</span>
+                   </div>
+                   <div class="flex justify-between items-center">
+                       <span class="text-yellow-500 font-bold">Rs.8,299</span>
+                       <button class="text-yellow-500 hover:text-yellow-400">
+                           <i class="fas fa-shopping-cart"></i>
+                       </button>
+                   </div>
+               </div>
+           </div>
+
+
+           <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+           data-category="drills" 
+           data-name="Asura Drill Machine 16.8" 
+           data-price="13500" 
+           data-description="Dual Battery 16.8 V"
+           data-images='[
+              "images/img/drill2222.jpg", 
+              "images/img/drill2.jpg", 
+              "images/img/drill22.jpg"
+           ]'>
+          <img src="images/img/drill2222222.jpg" alt="Drill Machine" class="w-full h-48 object-cover">
+          <div class="p-4">
+              <h3 class="text-lg font-semibold mb-1">Asura Drill Machine</h3>
+              <div class="flex items-center text-yellow-400 mb-2">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span class="text-gray-400 ml-2">(45)</span>
+              </div>
+              <div class="flex justify-between items-center">
+                  <span class="text-yellow-500 font-bold">Rs.8,299</span>
+                  <button class="text-yellow-500 hover:text-yellow-400">
+                      <i class="fas fa-shopping-cart"></i>
+                  </button>
+              </div>
+          </div>
+      </div>
+           <!-- Product 2: Welding Machine -->
+           <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+                data-category="welding" 
+                data-name="Japani Welding Machine" 
+                data-price="22000" 
+                data-description="Powerful multi-phase (3-2-1) welding machine with advanced arc control  for industrial applications."
+                data-images='[
+                   "images/img/weld.jpg", 
+                   "images/img/weld22.jpg", 
+                   "images/img/weld.jpg"
+                ]'>
+               <img src="images/img/weld.jpg" alt="Welding Machine" class="w-full h-48 object-cover">
+               <div class="p-4">
+                   <h3 class="text-lg font-semibold mb-1">Japani Welding Machine</h3>
+                   <div class="flex items-center text-yellow-400 mb-2">
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="far fa-star"></i>
+                       <span class="text-gray-400 ml-2">(32)</span>
+                   </div>
+                   <div class="flex justify-between items-center">
+                       <span class="text-yellow-500 font-bold">Rs.22,000</span>
+                       <button class="text-yellow-500 hover:text-yellow-400">
+                           <i class="fas fa-shopping-cart"></i>
+                       </button>
+                   </div>
+               </div>
+           </div>
+
+           <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+           data-category="cutters" 
+           data-name="Japani iron Cutter" 
+           data-price="22000" 
+           data-description="Powerful multi-phase (3-2-1) welding machine with advanced arc control  for industrial applications."
+           data-images='[
+              "images/img/weld.jpg", 
+              "images/img/weld22.jpg", 
+              "images/img/weld.jpg"
+           ]'>
+          <img src="  images/oo9.jpeg" alt="Welding Machine" class="w-full h-48 object-cover">
+          <div class="p-4">
+              <h3 class="text-lg font-semibold mb-1">Japani iron Cutter </h3>
+              <div class="flex items-center text-yellow-400 mb-2">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <span class="text-gray-400 ml-2">(32)</span>
+              </div>
+              <div class="flex justify-between items-center">
+                  <span class="text-yellow-500 font-bold">Rs.22,000</span>
+                  <button class="text-yellow-500 hover:text-yellow-400">
+                      <i class="fas fa-shopping-cart"></i>
+                  </button>
+              </div>
+          </div>
+      </div>
+         
+
+      <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+      data-category="pliers" 
+      data-name="INCO Pliers" 
+      data-price="1200" 
+      data-description="Powerful multi-phase (3-2-1) welding machine with advanced arc control  for industrial applications."
+      data-images='[
+         "images/img/weld.jpg", 
+         "images/img/weld22.jpg", 
+         "images/img/weld.jpg"
+      ]'>
+     <img src="images/pl.jpeg" alt="Welding Machine" class="w-full h-48 object-cover">
+     <div class="p-4">
+         <h3 class="text-lg font-semibold mb-1">INCO Pliers</h3>
+         <div class="flex items-center text-yellow-400 mb-2">
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="far fa-star"></i>
+             <span class="text-gray-400 ml-2">(32)</span>
+         </div>
+         <div class="flex justify-between items-center">
+             <span class="text-yellow-500 font-bold">Rs.22,000</span>
+             <button class="text-yellow-500 hover:text-yellow-400">
+                 <i class="fas fa-shopping-cart"></i>
+             </button>
+         </div>
+     </div>
+ </div>
+    
+
+ <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+ data-category="wrenches" 
+ data-name="INCO Wrench" 
+ data-price="4000" 
+ data-description="Powerful multi-phase (3-2-1) welding machine with advanced arc control  for industrial applications."
+ data-images='[
+    "images/img/weld.jpg", 
+    "images/img/weld22.jpg", 
+    "images/img/weld.jpg"
+ ]'>
+<img src="images/wr.jpeg" alt="Welding Machine" class="w-full h-48 object-cover">
+<div class="p-4">
+    <h3 class="text-lg font-semibold mb-1">INCO Pliers</h3>
+    <div class="flex items-center text-yellow-400 mb-2">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <span class="text-gray-400 ml-2">(32)</span>
+    </div>
+    <div class="flex justify-between items-center">
+        <span class="text-yellow-500 font-bold">Rs.22,000</span>
+        <button class="text-yellow-500 hover:text-yellow-400">
+            <i class="fas fa-shopping-cart"></i>
+        </button>
+    </div>
+</div>
+</div>
+
+                <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+                     data-category="drills" 
+                     data-name="Makita Drill Machine" 
+                     data-price="7500" 
+                     data-description="High-performance drill machine Dual Battery"
+                     data-images='[
+                        "images/img/drill.jpg", 
+                        "images/img/dr.jpg", 
+                        "images/img/drill22.jpg"
+                     ]'>
+                    <img src="images/img/drill.jpg" alt="Drill Machine" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold mb-1">Makita Drill Machine</h3>
+                        <div class="flex items-center text-yellow-400 mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-gray-400 ml-2">(45)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-yellow-500 font-bold">Rs.8,299</span>
+                            <button class="text-yellow-500 hover:text-yellow-400">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+                     data-category="drills" 
+                     data-name="Edon UAE Drill Machine" 
+                     data-price="22000" 
+                     data-description="High-performance drill machine 24 V"
+                     data-images='[
+                        "images/img/drill33.jpg", 
+                        "images/img/drill3333.jpg", 
+                        "images/img/drill333333.jpg"
+                     ]'>
+                    <img src="images/img/drill33.jpg" alt="Drill Machine" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold mb-1">makita Drill Machine</h3>
+                        <div class="flex items-center text-yellow-400 mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-gray-400 ml-2">(45)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-yellow-500 font-bold">Rs.8,299</span>
+                            <button class="text-yellow-500 hover:text-yellow-400">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+                data-category="drills" 
+                data-name="Asura Drill Machine 16.8" 
+                data-price="13500" 
+                data-description="Dual Battery 16.8 V"
+                data-images='[
+                   "images/img/drill2222.jpg", 
+                   "images/img/drill2.jpg", 
+                   "images/img/drill22.jpg"
+                ]'>
+               <img src="images/img/drill2222222.jpg" alt="Drill Machine" class="w-full h-48 object-cover">
+               <div class="p-4">
+                   <h3 class="text-lg font-semibold mb-1">Asura Drill Machine</h3>
+                   <div class="flex items-center text-yellow-400 mb-2">
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star-half-alt"></i>
+                       <span class="text-gray-400 ml-2">(45)</span>
+                   </div>
+                   <div class="flex justify-between items-center">
+                       <span class="text-yellow-500 font-bold">Rs.8,299</span>
+                       <button class="text-yellow-500 hover:text-yellow-400">
+                           <i class="fas fa-shopping-cart"></i>
+                       </button>
+                   </div>
+               </div>
+           </div>
+                <!-- Product 2: Welding Machine -->
+                <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+                     data-category="welding" 
+                     data-name="Japani Welding Machine" 
+                     data-price="22000" 
+                     data-description="Powerful multi-phase (3-2-1) welding machine with advanced arc control  for industrial applications."
+                     data-images='[
+                        "images/img/weld.jpg", 
+                        "images/img/weld22.jpg", 
+                        "images/img/weld.jpg"
+                     ]'>
+                    <img src="images/img/weld.jpg" alt="Welding Machine" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold mb-1">Japani Welding Machine</h3>
+                        <div class="flex items-center text-yellow-400 mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="text-gray-400 ml-2">(32)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-yellow-500 font-bold">Rs.22,000</span>
+                            <button class="text-yellow-500 hover:text-yellow-400">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+                data-category="cutters" 
+                data-name="Japani iron Cutter" 
+                data-price="22000" 
+                data-description="Powerful multi-phase (3-2-1) welding machine with advanced arc control  for industrial applications."
+                data-images='[
+                   "images/img/weld.jpg", 
+                   "images/img/weld22.jpg", 
+                   "images/img/weld.jpg"
+                ]'>
+               <img src="  images/oo9.jpeg" alt="Welding Machine" class="w-full h-48 object-cover">
+               <div class="p-4">
+                   <h3 class="text-lg font-semibold mb-1">Japani iron Cutter </h3>
+                   <div class="flex items-center text-yellow-400 mb-2">
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="fas fa-star"></i>
+                       <i class="far fa-star"></i>
+                       <span class="text-gray-400 ml-2">(32)</span>
+                   </div>
+                   <div class="flex justify-between items-center">
+                       <span class="text-yellow-500 font-bold">Rs.22,000</span>
+                       <button class="text-yellow-500 hover:text-yellow-400">
+                           <i class="fas fa-shopping-cart"></i>
+                       </button>
+                   </div>
+               </div>
+           </div>
+              
+
+           <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+           data-category="pliers" 
+           data-name="INCO Pliers" 
+           data-price="1200" 
+           data-description="Powerful multi-phase (3-2-1) welding machine with advanced arc control  for industrial applications."
+           data-images='[
+              "images/img/weld.jpg", 
+              "images/img/weld22.jpg", 
+              "images/img/weld.jpg"
+           ]'>
+          <img src="images/pl.jpeg" alt="Welding Machine" class="w-full h-48 object-cover">
+          <div class="p-4">
+              <h3 class="text-lg font-semibold mb-1">INCO Pliers</h3>
+              <div class="flex items-center text-yellow-400 mb-2">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <span class="text-gray-400 ml-2">(32)</span>
+              </div>
+              <div class="flex justify-between items-center">
+                  <span class="text-yellow-500 font-bold">Rs.22,000</span>
+                  <button class="text-yellow-500 hover:text-yellow-400">
+                      <i class="fas fa-shopping-cart"></i>
+                  </button>
+              </div>
+          </div>
+      </div>
+         
+
+      <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
+      data-category="wrenches" 
+      data-name="INCO Wrench" 
+      data-price="4000" 
+      data-description="Powerful multi-phase (3-2-1) welding machine with advanced arc control  for industrial applications."
+      data-images='[
+         "images/img/weld.jpg", 
+         "images/img/weld22.jpg", 
+         "images/img/weld.jpg"
+      ]'>
+     <img src="images/wr.jpeg" alt="Welding Machine" class="w-full h-48 object-cover">
+     <div class="p-4">
+         <h3 class="text-lg font-semibold mb-1">INCO Pliers</h3>
+         <div class="flex items-center text-yellow-400 mb-2">
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="far fa-star"></i>
+             <span class="text-gray-400 ml-2">(32)</span>
+         </div>
+         <div class="flex justify-between items-center">
+             <span class="text-yellow-500 font-bold">Rs.22,000</span>
+             <button class="text-yellow-500 hover:text-yellow-400">
+                 <i class="fas fa-shopping-cart"></i>
+             </button>
+         </div>
+     </div>
+ </div>
+    
+      
+                <!-- More products... (add similar product cards) -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="fixed inset-0 hidden items-center justify-center modal p-4 bg-black bg-opacity-50">
+        <div class="bg-gray-900 rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl">
+            <button id="close-modal" class="absolute top-4 right-4 text-white text-2xl z-10 hover:text-yellow-500 transition">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="grid md:grid-cols-2 gap-8 p-8">
+                <!-- Enhanced Product Images Section -->
+                <div>
+                    <div id="main-product-image" class="mb-6">
+                        <img src="images/img/drill.jpg" alt="Product Image" class="w-full h-96 object-cover rounded-xl" id="modal-main-image">
+                    </div>
+                    <div id="product-thumbnails" class="flex space-x-4 justify-center">
+                        <!-- Thumbnails will be dynamically added here -->
+                    </div>
+                </div>
+                
+                <!-- Product Details -->
+                <div>
+                    <h2 id="modal-product-name" class="text-3xl font-bold text-yellow-500 mb-4"></h2>
+                    <p id="modal-product-description" class="text-gray-800 w-90 p-4 border-2 border-yellow-500 bg-yellow-400 rounded-xl shadow-md mb-6 text-lg font-bold"></p>
+                    
+                    <div class="flex items-center mb-6">
+                        <span id="modal-product-price" class="text-2xl font-bold text-yellow-500 mr-4"></span>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-gray-400 ml-2" id="modal-review-count">(45)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-2 text-xl">Product Specifications:</h3>
+                        <ul id="modal-product-features" class="list-disc list-inside text-gray-300 space-y-2">
+                            <!-- Features will be dynamically added here -->
+                        </ul>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <a href="" id="whatsapp-contact" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full flex items-center transition">
+                            <i class="fab fa-whatsapp mr-2"></i> Contact on WhatsApp
+                        </a>
+                        <button class="bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-400 transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-</html>
+    <script>
+     // Product Modal Functionality
+     const productsGrid = document.getElementById('products-grid');
+        const productModal = document.getElementById('product-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const mainProductImage = document.getElementById('modal-main-image');
+        const productThumbnails = document.getElementById('product-thumbnails');
+        const modalProductName = document.getElementById('modal-product-name');
+        const modalProductDescription = document.getElementById('modal-product-description');
+        const modalProductPrice = document.getElementById('modal-product-price');
+        const whatsappContactBtn = document.getElementById('whatsapp-contact');
+        const modalProductFeatures = document.getElementById('modal-product-features');
+        const modalReviewCount = document.getElementById('modal-review-count');
+
+        // Open Product Modal
+        productsGrid.addEventListener('click', function(e) {
+            const productCard = e.target.closest('.product-grid-item');
+            if (productCard) {
+                const images = JSON.parse(productCard.dataset.images || '[]');
+                const name = productCard.dataset.name;
+                const price = productCard.dataset.price;
+                const description = productCard.dataset.description;
+                const category = productCard.dataset.category;
+
+                // Ensure we have at least 3 images
+                const displayImages = images.length >= 3 ? images : 
+                    [...images, ...Array(3 - images.length).fill(images[0] || '')];
+
+                // Set main image
+                mainProductImage.src = displayImages[0];
+                mainProductImage.alt = name;
+
+                // Create thumbnails with larger, more prominent view
+                productThumbnails.innerHTML = displayImages.map((img, index) => `
+                    <img src="${img}" alt="${name} - Image ${index + 1}" 
+                         class="w-24 h-24 object-cover rounded-lg cursor-pointer thumbnail-image 
+                         ${index === 0 ? 'border-2 border-yellow-500' : 'opacity-70 hover:opacity-100'}">
+                `).join('');
+
+                // Set product details
+                modalProductName.textContent = name;
+                modalProductDescription.textContent = description;
+                modalProductPrice.textContent = `Rs.${price}`;
+
+                // Dynamic features based on category
+                const featuresMap = {
+                    'drills': [
+                        'High-performance motor',
+                        'Dual battery system',
+                        'Adjustable torque settings',
+                        'Ergonomic design'
+                    ],
+                    'welding': [
+                        'Multi-phase compatibility',
+                        'High electrical efficiency',
+                        'Robust construction',
+                        'Precise arc control'
+                    ],
+                    'cutters': [
+                        'Precision cutting edge',
+                        'Durable material construction',
+                        'Comfortable grip',
+                        'Multi-purpose usage'
+                    ],
+                    'pliers': [
+                        'Professional grade quality',
+                        'Rust-resistant coating',
+                        'Ergonomic handles',
+                        'Versatile application'
+                    ],
+                    'wrenches': [
+                        'Smooth jaw adjustment',
+                        'High-strength alloy steel',
+                        'Corrosion-resistant finish',
+                        'Precise measurement markings'
+                    ]
+                };
+
+                // Set features
+                modalProductFeatures.innerHTML = (featuresMap[category] || [
+                    'Professional Grade Quality',
+                    'Durable Construction',
+                    'Ergonomic Design'
+                ]).map(feature => `<li>${feature}</li>`).join('');
+
+                // Update WhatsApp link
+                whatsappContactBtn.href = `https://wa.me/923175679385?text=I'm%20interested%20in%20the%20${encodeURIComponent(name)}`;
+
+                // Show modal
+                productModal.classList.remove('hidden');
+                productModal.classList.add('flex');
+            }
+        });
+
+        // Close Modal
+        closeModalBtn.addEventListener('click', () => {
+            productModal.classList.remove('flex');
+            productModal.classList.add('hidden');
+        });
+
+        // Thumbnail Click Handler
+        productThumbnails.addEventListener('click', (e) => {
+            if (e.target.classList.contains('thumbnail-image')) {
+                // Remove border and opacity from all thumbnails
+                document.querySelectorAll('.thumbnail-image').forEach(img => {
+                    img.classList.remove('border-2', 'border-yellow-500');
+                    img.classList.add('opacity-70');
+                });
+
+                // Add border to clicked thumbnail and increase opacity
+                e.target.classList.add('border-2', 'border-yellow-500');
+                e.target.classList.remove('opacity-70');
+
+                // Update main image
+                mainProductImage.src = e.target.src;
+                mainProductImage.alt = e.target.alt;
+            }
+        });
+       // Category Filtering for Desktop
+const categoryFilter = document.getElementById('category-filter');
+const searchInput = document.getElementById('search-input');
+
+categoryFilter.addEventListener('change', () => {
+    const selectedCategory = categoryFilter.value.toLowerCase().trim();
+    const products = document.querySelectorAll('.product-grid-item');
+
+    products.forEach(product => {
+        const productCategory = product.dataset.category.toLowerCase().trim();
+        
+        // Normalize categories to match exactly
+        const normalizedCategories = {
+          
+            'drill machines': 'drills',
+            'welding': 'welding',
+            'cutters': 'cutters',
+            'pliers': 'pliers',
+            'wrenches': 'wrenches'
+        };
+
+        // Check if the selected category matches the product's category
+        const isMatch = selectedCategory === '' || 
+                        productCategory === selectedCategory || 
+                        normalizedCategories[selectedCategory] === productCategory;
+
+        // Show or hide the product based on the match
+        product.style.display = isMatch ? 'block' : 'none';
+    });
+});
+
+// Mobile Category Filtering
+const mobileCategoryFilter = document.getElementById('mobile-category-filter');
+const mobileSearchInput = document.getElementById('mobile-search-input');
+
+mobileCategoryFilter.addEventListener('change', () => {
+    const selectedCategory = mobileCategoryFilter.value.toLowerCase().trim();
+    const products = document.querySelectorAll('.product-grid-item');
+
+    products.forEach(product => {
+        const productCategory = product.dataset.category.toLowerCase().trim();
+        
+        // Normalize categories to match exactly
+        const normalizedCategories = {
+            'drills': 'drills',
+            'drill machines': 'drills',
+            'welding': 'welding',
+            'cutters': 'cutters',
+            'pliers': 'pliers',
+            'wrenches': 'wrenches'
+        };
+
+        // Check if the selected category matches the product's category
+        const isMatch = selectedCategory === '' || 
+                        productCategory === selectedCategory || 
+                        normalizedCategories[selectedCategory] === productCategory;
+
+        // Show or hide the product based on the match
+        product.style.display = isMatch ? 'block' : 'none';
+    });
+});
+
+// Search Filtering for Desktop
+searchInput.addEventListener('input', () => {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    const products = document.querySelectorAll('.product-grid-item');
+
+    products.forEach(product => {
+        const productName = product.dataset.name.toLowerCase().trim();
+        product.style.display = productName.includes(searchTerm) ? 'block' : 'none';
+    });
+});
+
+// Search Filtering for Mobile
+mobileSearchInput.addEventListener('input', () => {
+    const searchTerm = mobileSearchInput.value.toLowerCase().trim();
+    const products = document.querySelectorAll('.product-grid-item');
+
+    products.forEach(product => {
+        const productName = product.dataset.name.toLowerCase().trim();
+        product.style.display = productName.includes(searchTerm) ? 'block' : 'none';
+    });
+});
+    </script>
+    </html>
