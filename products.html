@@ -375,15 +375,70 @@
                     </div>
                     
                     <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
-                        <a href="" id="whatsapp-contact" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-full flex items-center justify-center transition text-sm md:text-base">
-                            <i class="fab fa-whatsapp mr-2"></i> Contact on WhatsApp
-                        </a>
-                        <button class="bg-yellow-500 text-black px-4 py-2 md:px-6 md:py-3 rounded-full hover:bg-yellow-400 transition text-sm md:text-base">
-                            Add to Cart
+                        <button id="order-whatsapp-btn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-full flex items-center justify-center transition text-sm md:text-base">
+                            <i class="fab fa-whatsapp mr-2"></i> Order on WhatsApp
                         </button>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    
+    <!-- WhatsApp Order Form Modal -->
+    <div id="whatsapp-form-modal" class="fixed inset-0 hidden items-center justify-center modal p-2 bg-black bg-opacity-80 z-[1001] overflow-y-auto">
+        <div class="bg-gray-900 rounded-xl max-w-md w-full mx-auto my-4 relative shadow-2xl p-4 max-h-[90vh] overflow-y-auto">
+            <button id="close-form-modal" class="absolute top-2 right-2 text-white text-xl z-10 hover:text-yellow-500 transition">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <h2 class="text-lg md:text-2xl font-bold text-yellow-500 mb-3 text-center">Complete Your Order</h2>
+            
+            <div id="order-details" class="bg-gray-800 p-3 rounded-lg mb-3">
+                <p class="text-gray-300 text-xs md:text-sm">You are ordering:</p>
+                <p id="form-product-name" class="text-yellow-500 font-bold text-sm md:text-base"></p>
+                <p id="form-product-price" class="text-white font-semibold text-sm md:text-base"></p>
+            </div>
+            
+            <form id="whatsapp-order-form" class="space-y-3">
+                <div>
+                    <label for="customer-name" class="block text-gray-300 mb-1 flex justify-between text-sm">
+                        <span>Full Name *</span> <span class="text-right">نام *</span>
+                    </label>
+                    <input type="text" id="customer-name" required class="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
+                </div>
+                
+                <div>
+                    <label for="customer-phone" class="block text-gray-300 mb-1 flex justify-between text-sm">
+                        <span>Phone Number *</span> <span class="text-right">فون نمبر *</span>
+                    </label>
+                    <input type="tel" id="customer-phone" required class="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
+                </div>
+                
+                <div>
+                    <label for="customer-address" class="block text-gray-300 mb-1 flex justify-between text-sm">
+                        <span>Delivery Address *</span> <span class="text-right">پتہ *</span>
+                    </label>
+                    <textarea id="customer-address" required rows="2" class="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm"></textarea>
+                </div>
+                
+                <div>
+                    <label for="customer-city" class="block text-gray-300 mb-1 flex justify-between text-sm">
+                        <span>City *</span> <span class="text-right">شہر *</span>
+                    </label>
+                    <input type="text" id="customer-city" required class="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
+                </div>
+            
+                <div>
+                    <label for="customer-notes" class="block text-gray-300 mb-1 flex justify-between text-sm">
+                        <span>Additional Notes</span> <span class="text-right">اضافی ہدایات</span>
+                    </label>
+                    <textarea id="customer-notes" rows="2" class="w-full bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm"></textarea>
+                </div>
+                
+                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-bold transition flex items-center justify-center text-sm">
+                    <i class="fab fa-whatsapp mr-2"></i> Submit Order via WhatsApp
+                </button>
+            </form>
         </div>
     </div>
     
@@ -392,10 +447,24 @@
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+            });
+        }
+      
+document.getElementById("whatsapp-order-form").addEventListener("submit", function(event) {
+    const phoneInput = document.getElementById("customer-phone");
+    const phoneNumber = phoneInput.value.trim();
+
+    if (!phoneNumber.length==11) {
+        alert("Phone number must start with 03 and 11 Numbers long.");
+        phoneInput.focus();
+        event.preventDefault(); // Prevent form submission
+    }
+});
+
+
         // Product Modal Functionality
         const productsGrid = document.getElementById('products-grid');
         const productModal = document.getElementById('product-modal');
@@ -405,10 +474,21 @@
         const modalProductName = document.getElementById('modal-product-name');
         const modalProductDescription = document.getElementById('modal-product-description');
         const modalProductPrice = document.getElementById('modal-product-price');
-        const whatsappContactBtn = document.getElementById('whatsapp-contact');
         const modalProductFeatures = document.getElementById('modal-product-features');
         const modalReviewCount = document.getElementById('modal-review-count');
-
+        
+        // WhatsApp Form Modal Elements
+        const orderWhatsAppBtn = document.getElementById('order-whatsapp-btn');
+        const whatsappFormModal = document.getElementById('whatsapp-form-modal');
+        const closeFormModalBtn = document.getElementById('close-form-modal');
+        const formProductName = document.getElementById('form-product-name');
+        const formProductPrice = document.getElementById('form-product-price');
+        const whatsappOrderForm = document.getElementById('whatsapp-order-form');
+        
+        // Global variables to store current product info
+        let currentProductName = '';
+        let currentProductPrice = '';
+        
         // Open Product Modal
         productsGrid.addEventListener('click', function(e) {
             const productCard = e.target.closest('.product-grid-item');
@@ -418,6 +498,10 @@
                 const price = productCard.dataset.price;
                 const description = productCard.dataset.description;
                 const category = productCard.dataset.category;
+                
+                // Save current product info globally
+                currentProductName = name;
+                currentProductPrice = `Rs.${parseInt(price).toLocaleString()}`;
 
                 // Ensure we have at least 3 images
                 const displayImages = images.length >= 3 ? images : 
@@ -438,7 +522,7 @@
                 // Set product details
                 modalProductName.textContent = name;
                 modalProductDescription.textContent = description;
-                modalProductPrice.textContent = `Rs.${parseInt(price).toLocaleString()}`;
+                modalProductPrice.textContent = currentProductPrice;
 
                 // Dynamic features based on category
                 const featuresMap = {
@@ -481,16 +565,143 @@
                     'Ergonomic Design'
                 ]).map(feature => `<li>${feature}</li>`).join('');
 
-                // Update WhatsApp link
-                whatsappContactBtn.href = `https://wa.me/923175679385?text=I'm%20interested%20in%20the%20${encodeURIComponent(name)}`;
-
                 // Show modal
                 productModal.classList.remove('hidden');
                 productModal.classList.add('flex');
             }
         });
 
-        // Close Modal
+        // Close Product Modal
+        closeModalBtn.addEventListener('click', () => {
+            productModal.classList.remove('flex');
+            productModal.classList.add('hidden');
+        });
+
+        // Open WhatsApp Form Modal
+        orderWhatsAppBtn.addEventListener('click', () => {
+            // Set product info in the form
+            formProductName.textContent = currentProductName;
+            formProductPrice.textContent = currentProductPrice;
+            
+            // Hide product modal and show form modal
+            productModal.classList.remove('flex');
+            productModal.classList.add('hidden');
+            
+            whatsappFormModal.classList.remove('hidden');
+            whatsappFormModal.classList.add('flex');
+        });
+        
+        // Close WhatsApp Form Modal
+        closeFormModalBtn.addEventListener('click', () => {
+            whatsappFormModal.classList.remove('flex');
+            whatsappFormModal.classList.add('hidden');
+        });
+// Handle WhatsApp form submission
+whatsappOrderForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const customerName = document.getElementById('customer-name').value;
+    const customerPhone = document.getElementById('customer-phone').value;
+    const customerAddress = document.getElementById('customer-address').value.trim();
+    const customerNotes = document.getElementById('customer-notes').value.trim();
+    const city = document.getElementById('customer-city').value.trim();
+    
+    let message = `*New Order*\n\n*Product:* ${currentProductName}\n*Price:* ${currentProductPrice}\n\n*Customer Details:*\n*Name:* ${customerName}\n*Phone:* ${customerPhone}\n*Address:* ${customerAddress} \n\n*City : * ${city}`;
+
+   
+    
+    message += `\n*Additional Notes:*\n${customerNotes || 'None'}`;
+    
+    // Properly encode message for WhatsApp URL - handle chunking for very long messages
+    let encodedMessage = "";
+    
+    // Split very long messages into smaller chunks (WhatsApp has URL length limitations)
+    if (message.length > 1000) {
+        // Send only essential information and note that details are too long
+        encodedMessage = encodeURIComponent(`*New Order*\n\n*Product:* ${currentProductName}\n*Price:* ${currentProductPrice}\n\n*Customer:* ${customerName}\n*Phone:* ${customerPhone}\n\nCustomer provided detailed address and notes that are too long for this message. Please contact them for complete details.`);
+    } else {
+        encodedMessage = encodeURIComponent(message);
+    }
+    
+    // WhatsApp business number
+    const whatsappNumber = '923175679385';
+    
+    // Create WhatsApp URL
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    
+    // Open WhatsApp in new tab
+    window.open(whatsappURL, '_blank');
+    
+    // Close the form modal after a brief delay
+    setTimeout(() => {
+        whatsappFormModal.classList.remove('flex');
+        whatsappFormModal.classList.add('hidden');
+        whatsappOrderForm.reset();
+    }, 500);
+});
+// Thumbnail image click handler
+productThumbnails.addEventListener('click', function(e) {
+    if (e.target.classList.contains('thumbnail-image')) {
+        // Update main image
+        mainProductImage.src = e.target.src;
+        
+        // Update thumbnail highlighting
+        document.querySelectorAll('.thumbnail-image').forEach(img => {
+            img.classList.remove('border-2', 'border-yellow-500');
+            img.classList.add('opacity-70');
+        });
+        
+        e.target.classList.add('border-2', 'border-yellow-500');
+        e.target.classList.remove('opacity-70');
+    }
+});
+
+// Category filter functionality
+const categoryFilter = document.getElementById('category-filter');
+const mobileCategoryFilter = document.getElementById('mobile-category-filter');
+const searchInput = document.getElementById('search-input');
+const mobileSearchInput = document.getElementById('mobile-search-input');
+
+function filterProducts() {
+    const selectedCategory = (categoryFilter.value || mobileCategoryFilter.value).toLowerCase();
+    const searchQuery = (searchInput.value || mobileSearchInput.value).toLowerCase();
+    
+    document.querySelectorAll('.product-grid-item').forEach(product => {
+        const productCategory = product.dataset.category.toLowerCase();
+        const productName = product.dataset.name.toLowerCase();
+        
+        const matchesCategory = selectedCategory === '' || productCategory === selectedCategory;
+        const matchesSearch = searchQuery === '' || productName.includes(searchQuery);
+        
+        if (matchesCategory && matchesSearch) {
+            product.style.display = 'block';
+        } else {
+            product.style.display = 'none';
+        }
+    });
+}
+
+// Set up event listeners for filters
+categoryFilter.addEventListener('change', filterProducts);
+mobileCategoryFilter.addEventListener('change', filterProducts);
+searchInput.addEventListener('input', filterProducts);
+mobileSearchInput.addEventListener('input', filterProducts);
+
+// Shrink navbar on scroll
+window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('py-2');
+        navbar.classList.remove('py-3', 'md:py-4');
+    } else {
+        navbar.classList.remove('py-2');
+        navbar.classList.add('py-3', 'md:py-4');
+    }
+});
+
+// Initialize with all products showing
+filterProducts();
         closeModalBtn.addEventListener('click', () => {
             productModal.classList.remove('flex');
             productModal.classList.add('hidden');
@@ -523,17 +734,9 @@
             }
         });
         
-        // Category Filtering (Desktop)
-        const categoryFilter = document.getElementById('category-filter');
-        const searchInput = document.getElementById('search-input');
-
         categoryFilter.addEventListener('change', () => {
             filterProducts(categoryFilter.value);
         });
-        
-        // Category Filtering (Mobile)
-        const mobileCategoryFilter = document.getElementById('mobile-category-filter');
-        const mobileSearchInput = document.getElementById('mobile-search-input');
 
         mobileCategoryFilter.addEventListener('change', () => {
             filterProducts(mobileCategoryFilter.value);
