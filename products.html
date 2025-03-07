@@ -443,159 +443,185 @@
     </div>
     
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('active');
-            });
-        }
-      
+     // Mobile Menu Toggle
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+
+if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+    });
+}
+
+// Phone number validation for WhatsApp form
 document.getElementById("whatsapp-order-form").addEventListener("submit", function(event) {
     const phoneInput = document.getElementById("customer-phone");
     const phoneNumber = phoneInput.value.trim();
 
-    if (!phoneNumber.length==11) {
-        alert("Phone number must start with 03 and 11 Numbers long.");
+    if (phoneNumber.length !== 11 || !phoneNumber.startsWith("03")) {
+        alert("Phone number must start with 03 and be 11 numbers long.");
         phoneInput.focus();
         event.preventDefault(); // Prevent form submission
     }
 });
 
+// Product Modal Functionality
+const productsGrid = document.getElementById('products-grid');
+const productModal = document.getElementById('product-modal');
+const closeModalBtn = document.getElementById('close-modal');
+const mainProductImage = document.getElementById('modal-main-image');
+const productThumbnails = document.getElementById('product-thumbnails');
+const modalProductName = document.getElementById('modal-product-name');
+const modalProductDescription = document.getElementById('modal-product-description');
+const modalProductPrice = document.getElementById('modal-product-price');
+const modalProductFeatures = document.getElementById('modal-product-features');
+const modalReviewCount = document.getElementById('modal-review-count');
 
-        // Product Modal Functionality
-        const productsGrid = document.getElementById('products-grid');
-        const productModal = document.getElementById('product-modal');
-        const closeModalBtn = document.getElementById('close-modal');
-        const mainProductImage = document.getElementById('modal-main-image');
-        const productThumbnails = document.getElementById('product-thumbnails');
-        const modalProductName = document.getElementById('modal-product-name');
-        const modalProductDescription = document.getElementById('modal-product-description');
-        const modalProductPrice = document.getElementById('modal-product-price');
-        const modalProductFeatures = document.getElementById('modal-product-features');
-        const modalReviewCount = document.getElementById('modal-review-count');
+// WhatsApp Form Modal Elements
+const orderWhatsAppBtn = document.getElementById('order-whatsapp-btn');
+const whatsappFormModal = document.getElementById('whatsapp-form-modal');
+const closeFormModalBtn = document.getElementById('close-form-modal');
+const formProductName = document.getElementById('form-product-name');
+const formProductPrice = document.getElementById('form-product-price');
+const whatsappOrderForm = document.getElementById('whatsapp-order-form');
+
+// Global variables to store current product info
+let currentProductName = '';
+let currentProductPrice = '';
+
+// Open Product Modal
+productsGrid.addEventListener('click', function(e) {
+    const productCard = e.target.closest('.product-grid-item');
+    if (productCard) {
+        const images = JSON.parse(productCard.dataset.images || '[]');
+        const name = productCard.dataset.name;
+        const price = productCard.dataset.price;
+        const description = productCard.dataset.description;
+        const category = productCard.dataset.category;
         
-        // WhatsApp Form Modal Elements
-        const orderWhatsAppBtn = document.getElementById('order-whatsapp-btn');
-        const whatsappFormModal = document.getElementById('whatsapp-form-modal');
-        const closeFormModalBtn = document.getElementById('close-form-modal');
-        const formProductName = document.getElementById('form-product-name');
-        const formProductPrice = document.getElementById('form-product-price');
-        const whatsappOrderForm = document.getElementById('whatsapp-order-form');
+        // Save current product info globally
+        currentProductName = name;
+        currentProductPrice = `Rs.${parseInt(price).toLocaleString()}`;
+
+        // Ensure we have at least 3 images
+        const displayImages = images.length >= 3 ? images : 
+            [...images, ...Array(3 - images.length).fill(images[0] || '')];
+
+        // Set main image
+        mainProductImage.src = displayImages[0];
+        mainProductImage.alt = name;
+
+        // Create thumbnails with larger, more prominent view
+        const thumbnailSize = window.innerWidth < 768 ? 'w-16 h-16' : 'w-24 h-24';
+        productThumbnails.innerHTML = displayImages.map((img, index) => `
+            <img src="${img}" alt="${name} - Image ${index + 1}" 
+                 class="${thumbnailSize} object-cover rounded-lg cursor-pointer thumbnail-image 
+                 ${index === 0 ? 'border-2 border-yellow-500' : 'opacity-70 hover:opacity-100'}">
+        `).join('');
+
+        // Set product details
+        modalProductName.textContent = name;
+        modalProductDescription.textContent = description;
+        modalProductPrice.textContent = currentProductPrice;
+
+        // Dynamic features based on category
+        const featuresMap = {
+            'drills': [
+                'High-performance motor',
+                'Dual battery system',
+                'Adjustable torque settings',
+                'Ergonomic design'
+            ],
+            'welding': [
+                'Multi-phase compatibility',
+                'High electrical efficiency',
+                'Robust construction',
+                'Precise arc control'
+            ],
+            'cutters': [
+                'Precision cutting edge',
+                'Durable material construction',
+                'Comfortable grip',
+                'Multi-purpose usage'
+            ],
+            'pliers': [
+                'Professional grade quality',
+                'Rust-resistant coating',
+                'Ergonomic handles',
+                'Versatile application'
+            ],
+            'wrenches': [
+                'Smooth jaw adjustment',
+                'High-strength alloy steel',
+                'Corrosion-resistant finish',
+                'Precise measurement markings'
+            ]
+        };
+
+        // Set features
+        modalProductFeatures.innerHTML = (featuresMap[category] || [
+            'Professional Grade Quality',
+            'Durable Construction',
+            'Ergonomic Design'
+        ]).map(feature => `<li>${feature}</li>`).join('');
+
+        // Show modal
+        productModal.classList.remove('hidden');
+        productModal.classList.add('flex');
+    }
+});
+
+// Close Product Modal
+closeModalBtn.addEventListener('click', () => {
+    productModal.classList.remove('flex');
+    productModal.classList.add('hidden');
+});
+
+// Close modal when clicking outside the content
+productModal.addEventListener('click', function(e) {
+    if (e.target === productModal) {
+        productModal.classList.remove('flex');
+        productModal.classList.add('hidden');
+    }
+});
+
+// Open WhatsApp Form Modal
+orderWhatsAppBtn.addEventListener('click', () => {
+    // Set product info in the form
+    formProductName.textContent = currentProductName;
+    formProductPrice.textContent = currentProductPrice;
+    
+    // Hide product modal and show form modal
+    productModal.classList.remove('flex');
+    productModal.classList.add('hidden');
+    
+    whatsappFormModal.classList.remove('hidden');
+    whatsappFormModal.classList.add('flex');
+});
+
+// Close WhatsApp Form Modal
+closeFormModalBtn.addEventListener('click', () => {
+    whatsappFormModal.classList.remove('flex');
+    whatsappFormModal.classList.add('hidden');
+});
+
+// Thumbnail image click handler
+productThumbnails.addEventListener('click', function(e) {
+    if (e.target.classList.contains('thumbnail-image')) {
+        // Update main image
+        mainProductImage.src = e.target.src;
         
-        // Global variables to store current product info
-        let currentProductName = '';
-        let currentProductPrice = '';
-        
-        // Open Product Modal
-        productsGrid.addEventListener('click', function(e) {
-            const productCard = e.target.closest('.product-grid-item');
-            if (productCard) {
-                const images = JSON.parse(productCard.dataset.images || '[]');
-                const name = productCard.dataset.name;
-                const price = productCard.dataset.price;
-                const description = productCard.dataset.description;
-                const category = productCard.dataset.category;
-                
-                // Save current product info globally
-                currentProductName = name;
-                currentProductPrice = `Rs.${parseInt(price).toLocaleString()}`;
-
-                // Ensure we have at least 3 images
-                const displayImages = images.length >= 3 ? images : 
-                    [...images, ...Array(3 - images.length).fill(images[0] || '')];
-
-                // Set main image
-                mainProductImage.src = displayImages[0];
-                mainProductImage.alt = name;
-
-                // Create thumbnails with larger, more prominent view
-                const thumbnailSize = window.innerWidth < 768 ? 'w-16 h-16' : 'w-24 h-24';
-                productThumbnails.innerHTML = displayImages.map((img, index) => `
-                    <img src="${img}" alt="${name} - Image ${index + 1}" 
-                         class="${thumbnailSize} object-cover rounded-lg cursor-pointer thumbnail-image 
-                         ${index === 0 ? 'border-2 border-yellow-500' : 'opacity-70 hover:opacity-100'}">
-                `).join('');
-
-                // Set product details
-                modalProductName.textContent = name;
-                modalProductDescription.textContent = description;
-                modalProductPrice.textContent = currentProductPrice;
-
-                // Dynamic features based on category
-                const featuresMap = {
-                    'drills': [
-                        'High-performance motor',
-                        'Dual battery system',
-                        'Adjustable torque settings',
-                        'Ergonomic design'
-                    ],
-                    'welding': [
-                        'Multi-phase compatibility',
-                        'High electrical efficiency',
-                        'Robust construction',
-                        'Precise arc control'
-                    ],
-                    'cutters': [
-                        'Precision cutting edge',
-                        'Durable material construction',
-                        'Comfortable grip',
-                        'Multi-purpose usage'
-                    ],
-                    'pliers': [
-                        'Professional grade quality',
-                        'Rust-resistant coating',
-                        'Ergonomic handles',
-                        'Versatile application'
-                    ],
-                    'wrenches': [
-                        'Smooth jaw adjustment',
-                        'High-strength alloy steel',
-                        'Corrosion-resistant finish',
-                        'Precise measurement markings'
-                    ]
-                };
-
-                // Set features
-                modalProductFeatures.innerHTML = (featuresMap[category] || [
-                    'Professional Grade Quality',
-                    'Durable Construction',
-                    'Ergonomic Design'
-                ]).map(feature => `<li>${feature}</li>`).join('');
-
-                // Show modal
-                productModal.classList.remove('hidden');
-                productModal.classList.add('flex');
-            }
-        });
-
-        // Close Product Modal
-        closeModalBtn.addEventListener('click', () => {
-            productModal.classList.remove('flex');
-            productModal.classList.add('hidden');
-        });
-
-        // Open WhatsApp Form Modal
-        orderWhatsAppBtn.addEventListener('click', () => {
-            // Set product info in the form
-            formProductName.textContent = currentProductName;
-            formProductPrice.textContent = currentProductPrice;
-            
-            // Hide product modal and show form modal
-            productModal.classList.remove('flex');
-            productModal.classList.add('hidden');
-            
-            whatsappFormModal.classList.remove('hidden');
-            whatsappFormModal.classList.add('flex');
+        // Update thumbnail highlighting
+        document.querySelectorAll('.thumbnail-image').forEach(img => {
+            img.classList.remove('border-2', 'border-yellow-500');
+            img.classList.add('opacity-70');
         });
         
-        // Close WhatsApp Form Modal
-        closeFormModalBtn.addEventListener('click', () => {
-            whatsappFormModal.classList.remove('flex');
-            whatsappFormModal.classList.add('hidden');
-        });
+        e.target.classList.add('border-2', 'border-yellow-500');
+        e.target.classList.remove('opacity-70');
+    }
+});
+
 // Handle WhatsApp form submission
 whatsappOrderForm.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -607,9 +633,7 @@ whatsappOrderForm.addEventListener('submit', function(e) {
     const customerNotes = document.getElementById('customer-notes').value.trim();
     const city = document.getElementById('customer-city').value.trim();
     
-    let message = `*New Order*\n\n*Product:* ${currentProductName}\n*Price:* ${currentProductPrice}\n\n*Customer Details:*\n*Name:* ${customerName}\n*Phone:* ${customerPhone}\n*Address:* ${customerAddress} \n\n*City : * ${city}`;
-
-   
+    let message = `*New Order*\n\n*Product:* ${currentProductName}\n*Price:* ${currentProductPrice}\n\n*Customer Details:*\n*Name:* ${customerName}\n*Phone:* ${customerPhone}\n*Address:* ${customerAddress} \n\n*City :* ${city}`;
     
     message += `\n*Additional Notes:*\n${customerNotes || 'None'}`;
     
@@ -640,155 +664,109 @@ whatsappOrderForm.addEventListener('submit', function(e) {
         whatsappOrderForm.reset();
     }, 500);
 });
-// Thumbnail image click handler
-productThumbnails.addEventListener('click', function(e) {
-    if (e.target.classList.contains('thumbnail-image')) {
-        // Update main image
-        mainProductImage.src = e.target.src;
-        
-        // Update thumbnail highlighting
-        document.querySelectorAll('.thumbnail-image').forEach(img => {
-            img.classList.remove('border-2', 'border-yellow-500');
-            img.classList.add('opacity-70');
-        });
-        
-        e.target.classList.add('border-2', 'border-yellow-500');
-        e.target.classList.remove('opacity-70');
-    }
-});
 
-// Category filter functionality
+// Category filter and search functionality
 const categoryFilter = document.getElementById('category-filter');
 const mobileCategoryFilter = document.getElementById('mobile-category-filter');
 const searchInput = document.getElementById('search-input');
 const mobileSearchInput = document.getElementById('mobile-search-input');
 
+// Combined filter function that handles both category and search
 function filterProducts() {
-    const selectedCategory = (categoryFilter.value || mobileCategoryFilter.value).toLowerCase();
-    const searchQuery = (searchInput.value || mobileSearchInput.value).toLowerCase();
+    const selectedCategory = (categoryFilter ? categoryFilter.value : '') || 
+                            (mobileCategoryFilter ? mobileCategoryFilter.value : '');
     
-    document.querySelectorAll('.product-grid-item').forEach(product => {
+    const searchQuery = (searchInput ? searchInput.value : '') || 
+                        (mobileSearchInput ? mobileSearchInput.value : '');
+    
+    const products = document.querySelectorAll('.product-grid-item');
+    
+    products.forEach(product => {
         const productCategory = product.dataset.category.toLowerCase();
         const productName = product.dataset.name.toLowerCase();
         
-        const matchesCategory = selectedCategory === '' || productCategory === selectedCategory;
-        const matchesSearch = searchQuery === '' || productName.includes(searchQuery);
+        // Check if product matches both category and search criteria
+        const matchesCategory = !selectedCategory || productCategory === selectedCategory.toLowerCase();
+        const matchesSearch = !searchQuery || productName.includes(searchQuery.toLowerCase());
         
-        if (matchesCategory && matchesSearch) {
-            product.style.display = 'block';
-        } else {
-            product.style.display = 'none';
-        }
+        // Show product only if it matches both filters
+        product.style.display = matchesCategory && matchesSearch ? 'block' : 'none';
     });
 }
 
-// Set up event listeners for filters
-categoryFilter.addEventListener('change', filterProducts);
-mobileCategoryFilter.addEventListener('change', filterProducts);
-searchInput.addEventListener('input', filterProducts);
-mobileSearchInput.addEventListener('input', filterProducts);
+// Event listeners for filters
+if (categoryFilter) {
+    categoryFilter.addEventListener('change', filterProducts);
+}
+
+if (mobileCategoryFilter) {
+    mobileCategoryFilter.addEventListener('change', filterProducts);
+}
+
+if (searchInput) {
+    searchInput.addEventListener('input', filterProducts);
+}
+
+if (mobileSearchInput) {
+    mobileSearchInput.addEventListener('input', filterProducts);
+}
+
+// Sync desktop and mobile filters
+function syncFilters(isCategory = true) {
+    if (isCategory && categoryFilter && mobileCategoryFilter) {
+        mobileCategoryFilter.value = categoryFilter.value;
+    } else if (!isCategory && searchInput && mobileSearchInput) {
+        mobileSearchInput.value = searchInput.value;
+    }
+    filterProducts();
+}
+
+if (categoryFilter) {
+    categoryFilter.addEventListener('change', () => syncFilters(true));
+}
+
+if (searchInput) {
+    searchInput.addEventListener('input', () => syncFilters(false));
+}
+
+if (mobileCategoryFilter) {
+    mobileCategoryFilter.addEventListener('change', () => {
+        if (categoryFilter) categoryFilter.value = mobileCategoryFilter.value;
+        filterProducts();
+    });
+}
+
+if (mobileSearchInput) {
+    mobileSearchInput.addEventListener('input', () => {
+        if (searchInput) searchInput.value = mobileSearchInput.value;
+        filterProducts();
+    });
+}
 
 // Shrink navbar on scroll
 window.addEventListener('scroll', function() {
     const navbar = document.getElementById('navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('py-2');
-        navbar.classList.remove('py-3', 'md:py-4');
-    } else {
-        navbar.classList.remove('py-2');
-        navbar.classList.add('py-3', 'md:py-4');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.classList.add('py-2');
+            navbar.classList.remove('py-3', 'md:py-4');
+        } else {
+            navbar.classList.remove('py-2');
+            navbar.classList.add('py-3', 'md:py-4');
+        }
     }
 });
 
-// Initialize with all products showing
-filterProducts();
-        closeModalBtn.addEventListener('click', () => {
-            productModal.classList.remove('flex');
-            productModal.classList.add('hidden');
-        });
-
-        // Close modal when clicking outside the content
-        productModal.addEventListener('click', function(e) {
-            if (e.target === productModal) {
-                productModal.classList.remove('flex');
-                productModal.classList.add('hidden');
-            }
-        });
-
-        // Thumbnail Click Handler
-        productThumbnails.addEventListener('click', (e) => {
-            if (e.target.classList.contains('thumbnail-image')) {
-                // Remove border and opacity from all thumbnails
-                document.querySelectorAll('.thumbnail-image').forEach(img => {
-                    img.classList.remove('border-2', 'border-yellow-500');
-                    img.classList.add('opacity-70');
-                });
-
-                // Add border to clicked thumbnail and increase opacity
-                e.target.classList.add('border-2', 'border-yellow-500');
-                e.target.classList.remove('opacity-70');
-
-                // Update main image
-                mainProductImage.src = e.target.src;
-                mainProductImage.alt = e.target.alt;
-            }
-        });
-        
-        categoryFilter.addEventListener('change', () => {
-            filterProducts(categoryFilter.value);
-        });
-
-        mobileCategoryFilter.addEventListener('change', () => {
-            filterProducts(mobileCategoryFilter.value);
-        });
-        
-        // Shared filter function
-        function filterProducts(selectedCategory) {
-            selectedCategory = selectedCategory.toLowerCase().trim();
-            const products = document.querySelectorAll('.product-grid-item');
-
-            products.forEach(product => {
-                const productCategory = product.dataset.category.toLowerCase().trim();
-                
-                // Normalize categories to match exactly
-                const normalizedCategories = {
-                    'drill machines': 'drills',
-                    'welding': 'welding',
-                    'cutters': 'cutters',
-                    'pliers': 'pliers',
-                    'wrenches': 'wrenches'
-                };
-
-                // Check if the selected category matches the product's category
-                const isMatch = selectedCategory === '' || 
-                                productCategory === selectedCategory || 
-                                normalizedCategories[selectedCategory] === productCategory;
-
-                // Show or hide the product based on the match
-                product.style.display = isMatch ? 'block' : 'none';
-            });
-        }
-
-        // Search Filtering (Desktop)
-        searchInput.addEventListener('input', () => {
-            const searchTerm = searchInput.value.toLowerCase().trim();
-            searchProducts(searchTerm);
-        });
-
-        // Search Filtering (Mobile)
-        mobileSearchInput.addEventListener('input', () => {
-            const searchTerm = mobileSearchInput.value.toLowerCase().trim();
-            searchProducts(searchTerm);
-        });
-        
-        // Shared search function
-        function searchProducts(searchTerm) {
-            const products = document.querySelectorAll('.product-grid-item');
-
-            products.forEach(product => {
-                const productName = product.dataset.name.toLowerCase().trim();
-                product.style.display = productName.includes(searchTerm) ? 'block' : 'none';
-            });
-        }
+// Initialize with all products showing when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Clear any previously selected filters
+    if (categoryFilter) categoryFilter.value = '';
+    if (mobileCategoryFilter) mobileCategoryFilter.value = '';
+    if (searchInput) searchInput.value = '';
+    if (mobileSearchInput) mobileSearchInput.value = '';
+    
+    // Show all products
+    filterProducts();
+});
     </script>
 </html>
