@@ -195,117 +195,11 @@
                 <input type="text" id="mobile-search-input" placeholder="Search products..." class="bg-gray-800 text-white px-3 py-2 rounded-lg text-sm w-full">
             </div>
         </div>
-        <div class="flex items-center ml-2">
-            <button id="login-button" class="bg-yellow-600 hover:bg-yellow-700 text-white py-1 px-3 rounded text-sm">
-                Login
-            </button>
-            <button id="add-product-button" class="hidden bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded text-sm ml-2">
-                Add Product
-            </button>
-            <button id="logout-button" class="hidden bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded text-sm ml-2">
-                Logout
-            </button>
-        </div>
+       
     </nav>
-    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-gray-800 p-6 rounded-lg w-full max-w-md">
-            <h2 class="text-xl text-yellow-500 font-bold mb-4">Admin Login</h2>
-            <div class="mb-4">
-                <label class="block text-gray-300 mb-1">Username</label>
-                <input type="text" id="username" class="w-full bg-gray-700 text-white px-3 py-2 rounded">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-300 mb-1">Password</label>
-                <input type="password" id="password" class="w-full bg-gray-700 text-white px-3 py-2 rounded">
-            </div>
-            <div class="flex justify-end">
-                <button id="cancel-login" class="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded mr-2">Cancel</button>
-                <button id="submit-login" class="bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded">Login</button>
-            </div>
-        </div>
-    </div>
+  
     
-    <!-- Product Form Modal -->
-    <div id="product-form-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-gray-800 p-6 rounded-lg w-full max-w-2xl max-h-screen overflow-y-auto">
-            <h2 id="product-form-title" class="text-xl text-yellow-500 font-bold mb-4">Add New Product</h2>
-            <form id="product-form" class="space-y-4">
-                <input type="hidden" id="product-id">
-                
-                <div>
-                    <label class="block text-gray-300 mb-1">Product Name</label>
-                    <input type="text" id="product-name" class="w-full bg-gray-700 text-white px-3 py-2 rounded" required>
-                </div>
-                
-                <div>
-                    <label class="block text-gray-300 mb-1">Category</label>
-                    <select id="product-category" class="w-full bg-gray-700 text-white px-3 py-2 rounded" required>
-                        <option value="drills">Drill Machines</option>
-                        <option value="cutters">Cutters</option>
-                        <option value="pliers">Pliers</option>
-                        <option value="wrenches">Wrenches</option>
-                        <option value="welding">Welding</option>
-                        <option value="jet">Jet Washers</option>
-                        <option value="air">Air Compressers</option>
-                    </select>
-                </div>
-                
-                <div>
-                    <label class="block text-gray-300 mb-1">Price (Rs.)</label>
-                    <input type="number" id="product-price" class="w-full bg-gray-700 text-white px-3 py-2 rounded" required>
-                </div>
-                
-                <div>
-                    <label class="block text-gray-300 mb-1">Description</label>
-                    <textarea id="product-description" class="w-full bg-gray-700 text-white px-3 py-2 rounded h-24" required></textarea>
-                </div>
-                
-                <div id="image-section">
-                    <label class="block text-gray-300 mb-1">Images (First image will be cover)</label>
-                    <div class="grid grid-cols-3 gap-4 mb-2">
-                        <div class="relative">
-                            <input type="file" id="product-image-1" accept="image/*" class="hidden" required>
-                            <div id="image-preview-1" class="h-32 bg-gray-700 rounded flex items-center justify-center cursor-pointer overflow-hidden">
-                                <i class="fas fa-plus text-gray-500"></i>
-                            </div>
-                            <span class="block text-xs text-yellow-500 mt-1 text-center">Cover Image</span>
-                        </div>
-                        <div class="relative">
-                            <input type="file" id="product-image-2" accept="image/*" class="hidden" required>
-                            <div id="image-preview-2" class="h-32 bg-gray-700 rounded flex items-center justify-center cursor-pointer overflow-hidden">
-                                <i class="fas fa-plus text-gray-500"></i>
-                            </div>
-                            <span class="block text-xs text-gray-400 mt-1 text-center">Image 2</span>
-                        </div>
-                        <div class="relative">
-                            <input type="file" id="product-image-3" accept="image/*" class="hidden" required>
-                            <div id="image-preview-3" class="h-32 bg-gray-700 rounded flex items-center justify-center cursor-pointer overflow-hidden">
-                                <i class="fas fa-plus text-gray-500"></i>
-                            </div>
-                            <span class="block text-xs text-gray-400 mt-1 text-center">Image 3</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex justify-end pt-2">
-                    <button type="button" id="cancel-product-form" class="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded mr-2">Cancel</button>
-                    <button type="submit" id="submit-product-form" class="bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded">Save Product</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    
-    <!-- Delete Confirmation Modal -->
-    <div id="delete-confirmation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-gray-800 p-6 rounded-lg w-full max-w-md">
-            <h2 class="text-xl text-red-500 font-bold mb-4">Confirm Delete</h2>
-            <p class="text-white mb-6">Are you sure you want to delete this product? This action cannot be undone.</p>
-            <div class="flex justify-end">
-                <button id="cancel-delete" class="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded mr-2">Cancel</button>
-                <button id="confirm-delete" class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded">Delete</button>
-            </div>
-        </div>
-    </div>
+   
     
     <!-- Products Grid -->
     <section class="pt-24 pb-10 px-3">
@@ -416,7 +310,7 @@
                 data-category="air" 
                 data-name="Air Compresser 24L pure copper" 
                 data-price="32,000" 
-                data-description="Powerful multi-phase (3-2-1) welding machine with advanced arc control for industrial applications."
+                data-description="Powerful Air Compresser with advanced arc control for industrial applications."
                 data-images='[
                     "images/bluepaint2.jpg", 
                     "images/bluepaint3.jpg", 
@@ -1365,410 +1259,455 @@ document.addEventListener('DOMContentLoaded', function() {
 });
     </script>
     </body><script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Admin credentials
-            const ADMIN_USERNAME = "s";
-            const ADMIN_PASSWORD = "1";
-            
-            // DOM Elements
-            const loginButton = document.getElementById('login-button');
-            const loginModal = document.getElementById('login-modal');
-            const addProductButton = document.getElementById('add-product-button');
-            const logoutButton = document.getElementById('logout-button');
-            const productFormModal = document.getElementById('product-form-modal');
-            const deleteConfirmationModal = document.getElementById('delete-confirmation-modal');
-            const productsGrid = document.getElementById('products-grid');
-            
-            // Local Storage Keys
-            const PRODUCTS_STORAGE_KEY = 'europeTraders_products';
-            const ADMIN_LOGGED_IN_KEY = 'europeTraders_adminLoggedIn';
-            
-            // Check if admin is logged in (from previous session)
-            function checkAdminLogin() {
-                const isLoggedIn = localStorage.getItem(ADMIN_LOGGED_IN_KEY) === 'true';
-                if (isLoggedIn) {
-                    loginButton.classList.add('hidden');
-                    addProductButton.classList.remove('hidden');
-                    logoutButton.classList.remove('hidden');
-                    showAdminControls();
-                }
-            }
-            
-            // Show admin controls for each product
-            function showAdminControls() {
-                const productItems = document.querySelectorAll('.product-grid-item');
-                productItems.forEach(item => {
-                    if (!item.querySelector('.admin-controls')) {
-                        const controlsDiv = document.createElement('div');
-                        controlsDiv.className = 'admin-controls flex justify-end p-2 bg-gray-900';
-                        
-                        const editButton = document.createElement('button');
-                        editButton.className = 'bg-blue-600 hover:bg-blue-700 text-white py-1 px-2 rounded text-xs mr-2';
-                        editButton.innerHTML = '<i class="fas fa-edit"></i> Modify';
-                        editButton.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            openEditForm(item);
-                        });
-                        
-                        const deleteButton = document.createElement('button');
-                        deleteButton.className = 'bg-red-600 hover:bg-red-700 text-white py-1 px-2 rounded text-xs';
-                        deleteButton.innerHTML = '<i class="fas fa-trash"></i> Delete';
-                        deleteButton.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            openDeleteConfirmation(item);
-                        });
-                        
-                        controlsDiv.appendChild(editButton);
-                        controlsDiv.appendChild(deleteButton);
-                        item.appendChild(controlsDiv);
-                    }
-                });
-            }
-            
-            // Hide admin controls
-            function hideAdminControls() {
-                const adminControls = document.querySelectorAll('.admin-controls');
-                adminControls.forEach(control => control.remove());
-            }
-            
-            // Load products from local storage
-            function loadProducts() {
-                const storedProducts = localStorage.getItem(PRODUCTS_STORAGE_KEY);
-                if (storedProducts) {
-                    return JSON.parse(storedProducts);
-                }
-                return [];
-            }
-            
-            // Save products to local storage
-            function saveProducts(products) {
-                localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
-            }
-            
-            // Render a single product
-            function renderProduct(product) {
-                const productElement = document.createElement('div');
-                productElement.className = 'product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer';
-                productElement.setAttribute('data-id', product.id);
-                productElement.setAttribute('data-category', product.category);
-                productElement.setAttribute('data-name', product.name);
-                productElement.setAttribute('data-price', product.price);
-                productElement.setAttribute('data-description', product.description);
-                productElement.setAttribute('data-images', JSON.stringify(product.images));
+       document.addEventListener('DOMContentLoaded', function() {
+    // Admin credentials
+    const ADMIN_USERNAME = "s";
+    const ADMIN_PASSWORD = "1";
+    
+    // DOM Elements
+    const loginButton = document.getElementById('login-button');
+    const loginModal = document.getElementById('login-modal');
+    const addProductButton = document.getElementById('add-product-button');
+    const logoutButton = document.getElementById('logout-button');
+    const productFormModal = document.getElementById('product-form-modal');
+    const deleteConfirmationModal = document.getElementById('delete-confirmation-modal');
+    const productsGrid = document.getElementById('products-grid');
+    
+    // Local Storage Keys
+    const PRODUCTS_STORAGE_KEY = 'europeTraders_products';
+    const ADMIN_LOGGED_IN_KEY = 'europeTraders_adminLoggedIn';
+    
+    // API URL
+    const PRODUCTS_API_URL = 'https://msharjeelraja.github.io/products/products.json';
+    
+    // Check if admin is logged in (from previous session)
+    function checkAdminLogin() {
+        const isLoggedIn = localStorage.getItem(ADMIN_LOGGED_IN_KEY) === 'true';
+        if (isLoggedIn) {
+            loginButton.classList.add('hidden');
+            addProductButton.classList.remove('hidden');
+            logoutButton.classList.remove('hidden');
+            showAdminControls();
+        }
+    }
+    
+    // Show admin controls for each product
+    function showAdminControls() {
+        const productItems = document.querySelectorAll('.product-grid-item');
+        productItems.forEach(item => {
+            if (!item.querySelector('.admin-controls')) {
+                const controlsDiv = document.createElement('div');
+                controlsDiv.className = 'admin-controls flex justify-end p-2 bg-gray-900';
                 
-                productElement.innerHTML = `
-                    <img src="${product.images[0]}" alt="${product.name}" class="w-full h-36 md:h-48 object-cover">
-                    <div class="p-2 md:p-4">
-                        <h3 class="product-title text-base font-semibold mb-1">${product.name}</h3>
-                        <div class="flex items-center text-yellow-400 mb-2 star-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span class="text-gray-400 ml-1 text-xs">(${Math.floor(Math.random() * 50) + 5})</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="product-price text-yellow-500 font-bold">Rs.${Number(product.price).toLocaleString()}</span>
-                            <button class="text-yellow-500 hover:text-yellow-400">
-                                <i class="fas fa-shopping-cart text-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-                
-                return productElement;
-            }
-            
-            // Render all products
-            function renderAllProducts() {
-                const products = loadProducts();
-                const existingProductIds = new Set();
-                
-                // Get existing product elements from the DOM
-                const existingProducts = productsGrid.querySelectorAll('.product-grid-item');
-                existingProducts.forEach(product => {
-                    const productId = product.getAttribute('data-id');
-                    if (productId) {
-                        existingProductIds.add(productId);
-                    }
+                const editButton = document.createElement('button');
+                editButton.className = 'bg-blue-600 hover:bg-blue-700 text-white py-1 px-2 rounded text-xs mr-2';
+                editButton.innerHTML = '<i class="fas fa-edit"></i> Modify';
+                editButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openEditForm(item);
                 });
                 
-                // Add new products that don't exist yet
-                products.forEach(product => {
-                    if (!existingProductIds.has(product.id)) {
-                        const productElement = renderProduct(product);
-                        productsGrid.appendChild(productElement);
-                    }
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'bg-red-600 hover:bg-red-700 text-white py-1 px-2 rounded text-xs';
+                deleteButton.innerHTML = '<i class="fas fa-trash"></i> Delete';
+                deleteButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openDeleteConfirmation(item);
                 });
                 
-                // Check admin login to show/hide controls
-                if (localStorage.getItem(ADMIN_LOGGED_IN_KEY) === 'true') {
-                    showAdminControls();
-                }
+                controlsDiv.appendChild(editButton);
+                controlsDiv.appendChild(deleteButton);
+                item.appendChild(controlsDiv);
             }
-            
-            // Generate a unique ID
-            function generateUniqueId() {
-                return '_' + Math.random().toString(36).substr(2, 9);
+        });
+    }
+    
+    // Hide admin controls
+    function hideAdminControls() {
+        const adminControls = document.querySelectorAll('.admin-controls');
+        adminControls.forEach(control => control.remove());
+    }
+    
+    // Fetch products from API
+    async function fetchProducts() {
+        try {
+            const response = await fetch(PRODUCTS_API_URL);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-            
-            // Convert file to data URL
-            function fileToDataURL(file) {
-                return new Promise((resolve) => {
-                    const reader = new FileReader();
-                    reader.onload = () => resolve(reader.result);
-                    reader.readAsDataURL(file);
-                });
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            // Fallback to local storage if API fails
+            return loadProductsFromLocalStorage();
+        }
+    }
+    
+    // Load products from local storage (fallback or for admin-added products)
+    function loadProductsFromLocalStorage() {
+        const storedProducts = localStorage.getItem(PRODUCTS_STORAGE_KEY);
+        if (storedProducts) {
+            return JSON.parse(storedProducts);
+        }
+        return [];
+    }
+    
+    // Merge API products with locally added products
+    async function loadProducts() {
+        // Get products from API
+        const apiProducts = await fetchProducts();
+        
+        // Get locally stored products (for admin-added items)
+        const localProducts = loadProductsFromLocalStorage();
+        
+        // Create a map of API products by ID for quick lookup
+        const apiProductMap = new Map(apiProducts.map(product => [product.id, product]));
+        
+        // Combine products, with local products overriding API products with the same ID
+        const combinedProducts = [...apiProducts];
+        
+        // Add local products that don't exist in API
+        localProducts.forEach(localProduct => {
+            if (!apiProductMap.has(localProduct.id)) {
+                combinedProducts.push(localProduct);
             }
+        });
+        
+        return combinedProducts;
+    }
+    
+    // Save products to local storage (only admin-added or modified products)
+    function saveProducts(products) {
+        localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
+    }
+    
+    // Render a single product
+    function renderProduct(product) {
+        const productElement = document.createElement('div');
+        productElement.className = 'product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer';
+        productElement.setAttribute('data-id', product.id);
+        productElement.setAttribute('data-category', product.category);
+        productElement.setAttribute('data-name', product.name);
+        productElement.setAttribute('data-price', product.price);
+        productElement.setAttribute('data-description', product.description || '');
+        
+        // Handle image paths - use the product.images array directly
+        // since images are relative to the products.html file
+        const images = product.images || [];
+        productElement.setAttribute('data-images', JSON.stringify(images));
+        
+        // Get the first image or use a placeholder
+        const firstImage = images.length > 0 ? images[0] : 'https://via.placeholder.com/300x200';
+        
+        productElement.innerHTML = `
+            <img src="${firstImage}" alt="${product.name}" class="w-full h-36 md:h-48 object-cover">
+            <div class="p-2 md:p-4">
+                <h3 class="product-title text-base font-semibold mb-1">${product.name}</h3>
+                <div class="flex items-center text-yellow-400 mb-2 star-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="text-gray-400 ml-1 text-xs">(${Math.floor(Math.random() * 50) + 5})</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="product-price text-yellow-500 font-bold">Rs.${Number(product.price).toLocaleString()}</span>
+                    <button class="text-yellow-500 hover:text-yellow-400">
+                        <i class="fas fa-shopping-cart text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        return productElement;
+    }
+    
+    // Render all products
+    async function renderAllProducts() {
+        const products = await loadProducts();
+        
+        // Clear existing products to avoid duplicates
+        productsGrid.innerHTML = '';
+        
+        // Add products to the grid
+        products.forEach(product => {
+            const productElement = renderProduct(product);
+            productsGrid.appendChild(productElement);
+        });
+        
+        // Check admin login to show/hide controls
+        if (localStorage.getItem(ADMIN_LOGGED_IN_KEY) === 'true') {
+            showAdminControls();
+        }
+    }
+    
+    // Generate a unique ID
+    function generateUniqueId() {
+        return '_' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    // Convert file to data URL
+    function fileToDataURL(file) {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.readAsDataURL(file);
+        });
+    }
+    
+    // Open edit form for a product
+    function openEditForm(productElement) {
+        const productId = productElement.getAttribute('data-id');
+        const productName = productElement.getAttribute('data-name');
+        const productCategory = productElement.getAttribute('data-category');
+        const productPrice = productElement.getAttribute('data-price');
+        const productDescription = productElement.getAttribute('data-description');
+        const productImages = JSON.parse(productElement.getAttribute('data-images'));
+        
+        // Set form title
+        document.getElementById('product-form-title').textContent = 'Modify Product';
+        
+        // Populate form
+        document.getElementById('product-id').value = productId;
+        document.getElementById('product-name').value = productName;
+        document.getElementById('product-category').value = productCategory;
+        document.getElementById('product-price').value = productPrice;
+        document.getElementById('product-description').value = productDescription;
+        
+        // Disable image inputs for edit mode
+        document.getElementById('image-section').style.display = 'none';
+        
+        // Show form
+        productFormModal.classList.remove('hidden');
+    }
+    
+    // Open delete confirmation
+    function openDeleteConfirmation(productElement) {
+        const productId = productElement.getAttribute('data-id');
+        
+        // Add event listener to confirm delete button
+        document.getElementById('confirm-delete').onclick = async () => {
+            await deleteProduct(productId);
+            deleteConfirmationModal.classList.add('hidden');
+        };
+        
+        // Show confirmation modal
+        deleteConfirmationModal.classList.remove('hidden');
+    }
+    
+    // Delete a product
+    async function deleteProduct(productId) {
+        // Get locally stored products
+        const localProducts = loadProductsFromLocalStorage();
+        
+        // Filter out the product to delete
+        const updatedProducts = localProducts.filter(product => product.id !== productId);
+        
+        // Save updated products
+        saveProducts(updatedProducts);
+        
+        // Remove product from DOM
+        const productElement = document.querySelector(`.product-grid-item[data-id="${productId}"]`);
+        if (productElement) {
+            productElement.remove();
+        }
+        
+        // Refresh the product display
+        await renderAllProducts();
+    }
+    
+    // Login Form Events
+    loginButton.addEventListener('click', () => {
+        loginModal.classList.remove('hidden');
+    });
+    
+    document.getElementById('cancel-login').addEventListener('click', () => {
+        loginModal.classList.add('hidden');
+    });
+    
+    document.getElementById('submit-login').addEventListener('click', () => {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+            // Login successful
+            localStorage.setItem(ADMIN_LOGGED_IN_KEY, 'true');
+            loginButton.classList.add('hidden');
+            addProductButton.classList.remove('hidden');
+            logoutButton.classList.remove('hidden');
+            loginModal.classList.add('hidden');
             
-            // Open edit form for a product
-            function openEditForm(productElement) {
-                const productId = productElement.getAttribute('data-id');
-                const productName = productElement.getAttribute('data-name');
-                const productCategory = productElement.getAttribute('data-category');
-                const productPrice = productElement.getAttribute('data-price');
-                const productDescription = productElement.getAttribute('data-description');
-                const productImages = JSON.parse(productElement.getAttribute('data-images'));
-                
-                // Set form title
-                document.getElementById('product-form-title').textContent = 'Modify Product';
-                
-                // Populate form
-                document.getElementById('product-id').value = productId;
-                document.getElementById('product-name').value = productName;
-                document.getElementById('product-category').value = productCategory;
-                document.getElementById('product-price').value = productPrice;
-                document.getElementById('product-description').value = productDescription;
-                
-                // Disable image inputs for edit mode
-                document.getElementById('image-section').style.display = 'none';
-                
-                // Show form
-                productFormModal.classList.remove('hidden');
+            // Show admin controls
+            showAdminControls();
+        } else {
+            alert('Invalid username or password');
+        }
+    });
+    
+    // Logout Button Event
+    logoutButton.addEventListener('click', () => {
+        localStorage.removeItem(ADMIN_LOGGED_IN_KEY);
+        loginButton.classList.remove('hidden');
+        addProductButton.classList.add('hidden');
+        logoutButton.classList.add('hidden');
+        
+        // Hide admin controls
+        hideAdminControls();
+    });
+    
+    // Add Product Button Event
+    addProductButton.addEventListener('click', () => {
+        // Reset form
+        document.getElementById('product-form').reset();
+        document.getElementById('product-id').value = '';
+        document.getElementById('product-form-title').textContent = 'Add New Product';
+        
+        // Enable image inputs for add mode
+        document.getElementById('image-section').style.display = 'block';
+        
+        // Clear image previews
+        document.getElementById('image-preview-1').innerHTML = '<i class="fas fa-plus text-gray-500"></i>';
+        document.getElementById('image-preview-2').innerHTML = '<i class="fas fa-plus text-gray-500"></i>';
+        document.getElementById('image-preview-3').innerHTML = '<i class="fas fa-plus text-gray-500"></i>';
+        
+        // Show form
+        productFormModal.classList.remove('hidden');
+    });
+    
+    // Product Form Cancel Button Event
+    document.getElementById('cancel-product-form').addEventListener('click', () => {
+        productFormModal.classList.add('hidden');
+    });
+    
+    // Delete Confirmation Cancel Button Event
+    document.getElementById('cancel-delete').addEventListener('click', () => {
+        deleteConfirmationModal.classList.add('hidden');
+    });
+    
+    // Image Preview Events
+    for (let i = 1; i <= 3; i++) {
+        const imageInput = document.getElementById(`product-image-${i}`);
+        const imagePreview = document.getElementById(`image-preview-${i}`);
+        
+        imagePreview.addEventListener('click', () => {
+            imageInput.click();
+        });
+        
+        imageInput.addEventListener('change', async (e) => {
+            if (e.target.files && e.target.files[0]) {
+                const dataUrl = await fileToDataURL(e.target.files[0]);
+                imagePreview.innerHTML = `<img src="${dataUrl}" class="h-full w-full object-cover">`;
             }
+        });
+    }
+    
+    // Product Form Submit Event
+    document.getElementById('product-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const productId = document.getElementById('product-id').value || generateUniqueId();
+        const productName = document.getElementById('product-name').value;
+        const productCategory = document.getElementById('product-category').value;
+        const productPrice = document.getElementById('product-price').value;
+        const productDescription = document.getElementById('product-description').value;
+        
+        // Get local products
+        const localProducts = loadProductsFromLocalStorage();
+        
+        // Edit mode (update existing product)
+        if (document.getElementById('product-id').value) {
+            // Find the product to update in local storage
+            const productIndex = localProducts.findIndex(product => product.id === productId);
             
-            // Open delete confirmation
-            function openDeleteConfirmation(productElement) {
-                const productId = productElement.getAttribute('data-id');
-                
-                // Add event listener to confirm delete button
-                document.getElementById('confirm-delete').onclick = () => {
-                    deleteProduct(productId);
-                    deleteConfirmationModal.classList.add('hidden');
-                };
-                
-                // Show confirmation modal
-                deleteConfirmationModal.classList.remove('hidden');
-            }
-            
-            // Delete a product
-            function deleteProduct(productId) {
-                // Get all products
-                const products = loadProducts();
-                
-                // Filter out the product to delete
-                const updatedProducts = products.filter(product => product.id !== productId);
+            if (productIndex !== -1) {
+                // Update product data (keeping the existing images)
+                localProducts[productIndex].name = productName;
+                localProducts[productIndex].category = productCategory;
+                localProducts[productIndex].price = productPrice;
+                localProducts[productIndex].description = productDescription;
                 
                 // Save updated products
-                saveProducts(updatedProducts);
-                
-                // Remove product from DOM
+                saveProducts(localProducts);
+            } else {
+                // Product not in local storage yet, add it
+                // First, get the current product from the DOM to get its images
                 const productElement = document.querySelector(`.product-grid-item[data-id="${productId}"]`);
                 if (productElement) {
-                    productElement.remove();
-                }
-            }
-            
-            // Login Form Events
-            loginButton.addEventListener('click', () => {
-                loginModal.classList.remove('hidden');
-            });
-            
-            document.getElementById('cancel-login').addEventListener('click', () => {
-                loginModal.classList.add('hidden');
-            });
-            
-            document.getElementById('submit-login').addEventListener('click', () => {
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                
-                if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-                    // Login successful
-                    localStorage.setItem(ADMIN_LOGGED_IN_KEY, 'true');
-                    loginButton.classList.add('hidden');
-                    addProductButton.classList.remove('hidden');
-                    logoutButton.classList.remove('hidden');
-                    loginModal.classList.add('hidden');
+                    const productImages = JSON.parse(productElement.getAttribute('data-images'));
                     
-                    // Show admin controls
-                    showAdminControls();
-                } else {
-                    alert('Invalid username or password');
-                }
-            });
-            
-            // Logout Button Event
-            logoutButton.addEventListener('click', () => {
-                localStorage.removeItem(ADMIN_LOGGED_IN_KEY);
-                loginButton.classList.remove('hidden');
-                addProductButton.classList.add('hidden');
-                logoutButton.classList.add('hidden');
-                
-                // Hide admin controls
-                hideAdminControls();
-            });
-            
-            // Add Product Button Event
-            addProductButton.addEventListener('click', () => {
-                // Reset form
-                document.getElementById('product-form').reset();
-                document.getElementById('product-id').value = '';
-                document.getElementById('product-form-title').textContent = 'Add New Product';
-                
-                // Enable image inputs for add mode
-                document.getElementById('image-section').style.display = 'block';
-                
-                // Clear image previews
-                document.getElementById('image-preview-1').innerHTML = '<i class="fas fa-plus text-gray-500"></i>';
-                document.getElementById('image-preview-2').innerHTML = '<i class="fas fa-plus text-gray-500"></i>';
-                document.getElementById('image-preview-3').innerHTML = '<i class="fas fa-plus text-gray-500"></i>';
-                
-                // Show form
-                productFormModal.classList.remove('hidden');
-            });
-            
-            // Product Form Cancel Button Event
-            document.getElementById('cancel-product-form').addEventListener('click', () => {
-                productFormModal.classList.add('hidden');
-            });
-            
-            // Delete Confirmation Cancel Button Event
-            document.getElementById('cancel-delete').addEventListener('click', () => {
-                deleteConfirmationModal.classList.add('hidden');
-            });
-            
-            // Image Preview Events
-            for (let i = 1; i <= 3; i++) {
-                const imageInput = document.getElementById(`product-image-${i}`);
-                const imagePreview = document.getElementById(`image-preview-${i}`);
-                
-                imagePreview.addEventListener('click', () => {
-                    imageInput.click();
-                });
-                
-                imageInput.addEventListener('change', async (e) => {
-                    if (e.target.files && e.target.files[0]) {
-                        const dataUrl = await fileToDataURL(e.target.files[0]);
-                        imagePreview.innerHTML = `<img src="${dataUrl}" class="h-full w-full object-cover">`;
-                    }
-                });
-            }
-            
-            // Product Form Submit Event
-            document.getElementById('product-form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                const productId = document.getElementById('product-id').value || generateUniqueId();
-                const productName = document.getElementById('product-name').value;
-                const productCategory = document.getElementById('product-category').value;
-                const productPrice = document.getElementById('product-price').value;
-                const productDescription = document.getElementById('product-description').value;
-                
-                // Get all products
-                const products = loadProducts();
-                
-                // Edit mode (update existing product)
-                if (document.getElementById('product-id').value) {
-                    // Find the product to update
-                    const productIndex = products.findIndex(product => product.id === productId);
-                    
-                    if (productIndex !== -1) {
-                        // Update product data (keeping the existing images)
-                        products[productIndex].name = productName;
-                        products[productIndex].category = productCategory;
-                        products[productIndex].price = productPrice;
-                        products[productIndex].description = productDescription;
-                        
-                        // Save updated products
-                        saveProducts(products);
-                        
-                        // Update product in DOM
-                        const productElement = document.querySelector(`.product-grid-item[data-id="${productId}"]`);
-                        if (productElement) {
-                            productElement.setAttribute('data-name', productName);
-                            productElement.setAttribute('data-category', productCategory);
-                            productElement.setAttribute('data-price', productPrice);
-                            productElement.setAttribute('data-description', productDescription);
-                            
-                            // Update displayed product info
-                            productElement.querySelector('.product-title').textContent = productName;
-                            productElement.querySelector('.product-price').textContent = `Rs.${Number(productPrice).toLocaleString()}`;
-                        }
-                    }
-                } 
-                // Add mode (create new product)
-                else {
-                    // Convert files to data URLs
-                    const imageFiles = [
-                        document.getElementById('product-image-1').files[0],
-                        document.getElementById('product-image-2').files[0],
-                        document.getElementById('product-image-3').files[0]
-                    ];
-                    
-                    if (!imageFiles[0] || !imageFiles[1] || !imageFiles[2]) {
-                        alert('Please select all three images');
-                        return;
-                    }
-                    
-                    const imageDataUrls = await Promise.all(imageFiles.map(file => fileToDataURL(file)));
-                    
-                    // Create new product
-                    const newProduct = {
+                    // Add to local products
+                    localProducts.push({
                         id: productId,
                         name: productName,
                         category: productCategory,
                         price: productPrice,
                         description: productDescription,
-                        images: imageDataUrls
-                    };
-                    
-                    // Add to products array
-                    products.push(newProduct);
+                        images: productImages
+                    });
                     
                     // Save updated products
-                    saveProducts(products);
-                    
-                    // Add new product to DOM
-                    const productElement = renderProduct(newProduct);
-                    productsGrid.appendChild(productElement);
+                    saveProducts(localProducts);
                 }
-                
-                // Close form
-                productFormModal.classList.add('hidden');
-                
-                // Update admin controls
-                if (localStorage.getItem(ADMIN_LOGGED_IN_KEY) === 'true') {
-                    showAdminControls();
-                }
-            });
+            }
+        } 
+        // Add mode (create new product)
+        else {
+            // Convert files to data URLs
+            const imageFiles = [
+                document.getElementById('product-image-1').files[0],
+                document.getElementById('product-image-2').files[0],
+                document.getElementById('product-image-3').files[0]
+            ];
             
-            // Close modals when clicking outside
-            window.addEventListener('click', (e) => {
-                if (e.target === loginModal) {
-                    loginModal.classList.add('hidden');
-                }
-                if (e.target === productFormModal) {
-                    productFormModal.classList.add('hidden');
-                }
-                if (e.target === deleteConfirmationModal) {
-                    deleteConfirmationModal.classList.add('hidden');
-                }
-            });
+            if (!imageFiles[0] || !imageFiles[1] || !imageFiles[2]) {
+                alert('Please select all three images');
+                return;
+            }
             
-            // Initialize
-            checkAdminLogin();
-            renderAllProducts();
-        });
+            const imageDataUrls = await Promise.all(imageFiles.map(file => fileToDataURL(file)));
+            
+            // Create new product
+            const newProduct = {
+                id: productId,
+                name: productName,
+                category: productCategory,
+                price: productPrice,
+                description: productDescription,
+                images: imageDataUrls
+            };
+            
+            // Add to local products array
+            localProducts.push(newProduct);
+            
+            // Save updated products
+            saveProducts(localProducts);
+        }
+        
+        // Close form
+        productFormModal.classList.add('hidden');
+        
+        // Refresh the product display
+        await renderAllProducts();
+    });
+    
+    // Close modals when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === loginModal) {
+            loginModal.classList.add('hidden');
+        }
+        if (e.target === productFormModal) {
+            productFormModal.classList.add('hidden');
+        }
+        if (e.target === deleteConfirmationModal) {
+            deleteConfirmationModal.classList.add('hidden');
+        }
+    });
+    
+    // Initialize
+    checkAdminLogin();
+    renderAllProducts();
+});
         </script>
 </html>
