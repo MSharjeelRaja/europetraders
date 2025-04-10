@@ -460,12 +460,12 @@ function updateImagePreviews() {
         const uploadButton = document.createElement('div');
         uploadButton.className = 'relative w-32 h-32 border-2 border-dashed border-gray-600 rounded-lg upload-button cursor-pointer hover:border-blue-500 transition-colors';
         uploadButton.innerHTML = `
-            <input type="file" class="absolute inset-0 opacity-0 cursor-pointer image-input" 
-                   accept="image/*" multiple ${uploadedImages.length === 0 ? 'capture="environment"' : ''}>
-            <div class="preview-placeholder w-full h-full flex items-center justify-center text-2xl">
-                <i class="fas fa-camera"></i>
-            </div>
-        `;
+    <input type="file" class="absolute inset-0 opacity-0 cursor-pointer image-input" 
+           accept="image/*" multiple>
+    <div class="preview-placeholder w-full h-full flex items-center justify-center text-2xl">
+        <i class="fas fa-camera"></i>
+    </div>
+`;
         container.appendChild(uploadButton);
     }
 }
