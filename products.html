@@ -174,9 +174,10 @@
                 <input type="text" id="search-input" placeholder="Search products..." class="bg-gray-800 text-white px-4 py-2 rounded-lg text-sm">
             </div>
             
-            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
-                <i class="fas fa-bars text-lg"></i>
+            <button id="add-product-btn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg ml-4">
+                <i class="fas fa-plus mr-2"></i>Add Product
             </button>
+            
         </div>
         
         <!-- Mobile Category Filters (Visible on Mobile) -->
@@ -240,103 +241,9 @@
              
             <!--End                  End-->
          <!--End                  End-->
-             <!-- Product 2: Welding Machine -->
-                    <!-- Product 2: Welding Machine -->
-                <!-- Product 2: Welding Machine -->
-                <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
-                data-category="jet" 
-                data-name="Dubai Car washer 3300w 160 Bar Pressure max flow 8L /min" 
-                data-price="20,000" 
-                data-description="Powerful Washer Jet machine with advanced arc control for Cleaning Purposes"
-                data-images='[
-                    "images/jet1.jpg", 
-                    "images/jet2.jpg", 
-                    "images/jet1.jpg"
-                ]'>
-                    <img src="images/jet1.jpg" alt="Welding Machine" class="w-full h-36 md:h-48 object-cover">
-                    <div class="p-2 md:p-4">
-                        <h3 class="product-title text-base font-semibold mb-1">Dubai Car washer 3300w 160 Bar Pressure max flow 8L /min</h3>
-                        <div class="flex items-center text-yellow-400 mb-2 star-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span class="text-gray-400 ml-1 text-xs">(32)</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="product-price text-yellow-500 font-bold">Rs.20,000</span>
-                            <button class="text-yellow-500 hover:text-yellow-400">
-                                <i class="fas fa-shopping-cart text-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+       
+        
               
-         <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
-         data-category="welding" 
-         data-name="Solder dual card Welding machine 500 Ampare
-         For rod 10/12 regular " 
-         data-price="26000" 
-         data-description="With leads box complete 
-         500 Ampare
-         "
-         data-images='[
-             "images/plant10.jpg", 
-             "images/plant13.jpg", 
-             "images/plant12.jpg"
-         ]'>
-             <img src="images/plant10.jpg" alt="Welding Machine" class="w-full h-36 md:h-48 object-cover">
-             <div class="p-2 md:p-4">
-                 <h3 class="product-title text-base font-semibold mb-1">Solder dual card Welding machine 500 Ampare</h3>
-                 <div class="flex items-center text-yellow-400 mb-2 star-rating">
-                     <i class="fas fa-star"></i>
-                     <i class="fas fa-star"></i>
-                     <i class="fas fa-star"></i>
-                     <i class="fas fa-star"></i>
-                     <i class="far fa-star"></i>
-                     <span class="text-gray-400 ml-1 text-xs">(22)</span>
-                 </div>
-                 <div class="flex justify-between items-center">
-                     <span class="product-price text-yellow-500 font-bold">Rs.26,000</span>
-                     <button class="text-yellow-500 hover:text-yellow-400">
-                         <i class="fas fa-shopping-cart text-sm"></i>
-                     </button>
-                 </div>
-             </div>
-         </div>
-           
-                <div class="product-grid-item bg-gray-800 rounded-xl overflow-hidden cursor-pointer" 
-                data-category="welding" 
-                data-name="Auto Darkening Welding Glasses
-                 " 
-                data-price="1500" 
-                data-description="Auto Darkening 
-                Anti dazzle Wind Break impact "
-                data-images='[
-                    "images/glasses.jpg", 
-                    "images/glasses1.jpg", 
-                    "images/glasses3.jpg"
-                ]'>
-                    <img src="images/glasses.jpg" alt="Welding Machine" class="w-full h-36 md:h-48 object-cover">
-                    <div class="p-2 md:p-4">
-                        <h3 class="product-title text-base font-semibold mb-1">Auto Darkening Welding Glasses</h3>
-                        <div class="flex items-center text-yellow-400 mb-2 star-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span class="text-gray-400 ml-1 text-xs">(150)</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="product-price text-yellow-500 font-bold">Rs.1,500</span>
-                            <button class="text-yellow-500 hover:text-yellow-400">
-                                <i class="fas fa-shopping-cart text-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
          
 
                 <!-- Repeat the same pattern for the other products with optimized mobile view -->
@@ -456,6 +363,203 @@
             </form>
         </div>
     </div>
+   
+
+
+
+<!-- Add Product Modal -->
+<div id="add-product-modal" class="fixed inset-0 hidden items-center justify-center modal p-3 bg-black bg-opacity-50 z-[1002]">
+    <div class="bg-gray-900 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl p-6">
+        <button id="close-add-product-modal" class="absolute top-2 right-2 text-white text-xl z-10 hover:text-yellow-500 transition">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <h2 class="text-2xl font-bold text-yellow-500 mb-6 text-center">Add New Product</h2>
+        
+        <form id="product-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Image Upload Section -->
+            <div class="md:col-span-2">
+                <label class="block text-gray-300 mb-2">Upload Images (Max 3)</label>
+                <div class="flex flex-wrap gap-4 mb-4 image-preview-container">
+                    <!-- Image previews will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div>
+                <label class="block text-gray-300 mb-2">Product Name</label>
+                <input type="text" id="product-name" required class="w-full bg-gray-800 text-white px-3 py-2 rounded-lg">
+            </div>
+            
+            <div>
+                <label class="block text-gray-300 mb-2">Price</label>
+                <input type="number" id="product-price" required class="w-full bg-gray-800 text-white px-3 py-2 rounded-lg">
+            </div>
+            
+            <div>
+                <label class="block text-gray-300 mb-2">Category</label>
+                <select id="product-category" required class="w-full bg-gray-800 text-white px-3 py-2 rounded-lg">
+                    <option value="drills">Drill Machines</option>
+                    <option value="cutters">Cutters</option>
+                    <option value="pliers">Pliers</option>
+                    <option value="wrenches">Wrenches</option>
+                    <option value="welding">Welding</option>
+                    <option value="jet">Jet Washers</option>
+                    <option value="air">Air Compressors</option>
+                </select>
+            </div>
+            
+            <div class="md:col-span-2">
+                <label class="block text-gray-300 mb-2">Description</label>
+                <textarea id="product-description" required rows="3" class="w-full bg-gray-800 text-white px-3 py-2 rounded-lg"></textarea>
+            </div>
+            
+            <div class="md:col-span-2 flex justify-end gap-4 mt-4">
+                <button type="button" id="save-products-btn" class="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-2 rounded-lg">
+                    <i class="fas fa-save mr-2"></i>Save Products
+                </button>
+                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg">
+                    <i class="fas fa-plus mr-2"></i>Add Product
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+let productsArray = [];
+let uploadedImages = [];
+let currentId = 1;
+
+// Image Handling Functions
+function handleImageUpload(e) {
+    const files = Array.from(e.target.files);
+    const newFiles = [...uploadedImages, ...files].slice(0, 3);
+    uploadedImages = newFiles;
+    updateImagePreviews();
+    e.target.value = '';
+}
+
+function updateImagePreviews() {
+    const container = document.querySelector('.image-preview-container');
+    container.innerHTML = '';
+    
+    uploadedImages.forEach((file, idx) => {
+        const preview = document.createElement('div');
+        preview.className = 'relative w-32 h-32';
+        preview.innerHTML = `
+            <img src="${URL.createObjectURL(file)}" class="w-full h-full object-cover rounded-lg">
+            <button type="button" class="absolute top-0 right-0 text-red-500 bg-black rounded-full px-2 py-1 text-xs" data-index="${idx}">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        container.appendChild(preview);
+    });
+    
+    if (uploadedImages.length < 3) {
+        const uploadButton = document.createElement('div');
+        uploadButton.className = 'relative w-32 h-32 border-2 border-dashed border-gray-600 rounded-lg upload-button cursor-pointer hover:border-blue-500 transition-colors';
+        uploadButton.innerHTML = `
+            <input type="file" class="absolute inset-0 opacity-0 cursor-pointer image-input" 
+                   accept="image/*" multiple ${uploadedImages.length === 0 ? 'capture="environment"' : ''}>
+            <div class="preview-placeholder w-full h-full flex items-center justify-center text-2xl">
+                <i class="fas fa-camera"></i>
+            </div>
+        `;
+        container.appendChild(uploadButton);
+    }
+}
+
+// Event Listeners
+document.addEventListener('change', function(e) {
+    if (e.target.classList.contains('image-input')) {
+        handleImageUpload(e);
+    }
+});
+
+document.addEventListener('click', function(e) {
+    if (e.target.closest('button[data-index]')) {
+        const index = parseInt(e.target.closest('button').dataset.index);
+        uploadedImages.splice(index, 1);
+        updateImagePreviews();
+    }
+});
+
+// Form Submission
+document.getElementById('product-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var name=document.getElementById('product-name').value;
+    const imagename = name.split(' ')[0]; // Get only first word
+    const newProduct = {
+
+        id: currentId++,
+        name: document.getElementById('product-name').value,
+        price: document.getElementById('product-price').value,
+        category: document.getElementById('product-category').value,
+        description: document.getElementById('product-description').value,
+        images: uploadedImages.map((file, idx) => `"images/img/${imagename}.jpg",`)
+    };
+    
+    productsArray.push(newProduct);
+    alert(`Product added! Total products: ${productsArray.length}`);
+    
+    // Reset form
+    this.reset();
+    uploadedImages = [];
+    updateImagePreviews();
+});
+
+// Save Products to WhatsApp
+document.getElementById('save-products-btn').addEventListener('click', function() {
+    if (productsArray.length === 0) {
+        alert('No products to save!');
+        return;
+    }
+
+    let message = '*New Products Submission*\n\n';
+    productsArray.forEach((product, index) => {
+    message += `{\n "id": "${index + 1}",\n` +
+               `"name": "${product.name}",\n` +
+               `"category": "${product.category}",\n` +  // Fixed missing quote and added closing quote
+               `"price": "${product.price}",\n` +
+               `"description": "${product.description}",\n` +
+               `"images": [\n${product.images.slice(0, 3).join('\n')}\n ]\n},`;  // Fixed extra comma and spacing issues
+});
+
+
+    const whatsappURL = `https://wa.me/923058689161?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, '_blank');
+    productsArray = [];
+});
+
+// Modal Controls
+document.getElementById('add-product-btn').addEventListener('click', () => {
+    document.getElementById('add-product-modal').classList.remove('hidden');
+    document.getElementById('add-product-modal').classList.add('flex');
+    updateImagePreviews();
+});
+
+document.getElementById('close-add-product-modal').addEventListener('click', () => {
+    document.getElementById('add-product-modal').classList.remove('flex');
+    document.getElementById('add-product-modal').classList.add('hidden');
+    uploadedImages = [];
+    updateImagePreviews();
+});
+
+document.getElementById('add-product-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.classList.remove('flex');
+        this.classList.add('hidden');
+    }
+});
+</script>
+
+
+
+
+
+
+    
     
     <script>
      // Mobile Menu Toggle
@@ -763,6 +867,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     </script>
+    
+
+
+
+
+
+
+    
     </body>
     <script>
    document.addEventListener('DOMContentLoaded', async function() {
